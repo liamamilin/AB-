@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 A B 测试的统计基础 | AB 测试实战</title>
+  <meta name="description" content="这是一本关于AB测试的书籍" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 A B 测试的统计基础 | AB 测试实战" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="这是一本关于AB测试的书籍" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 A B 测试的统计基础 | AB 测试实战" />
+  
+  <meta name="twitter:description" content="这是一本关于AB测试的书籍" />
+  
+
+<meta name="author" content="米霖" />
+
+
+<meta name="date" content="2024-11-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="如何确定ab实验.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">AB测试实战</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> bibliography: [book.bib, packages.bib]</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#ab-测试的重要性"><i class="fa fa-check"></i><b>1.1</b> AB 测试的重要性</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#ab-测试的常见应用"><i class="fa fa-check"></i><b>1.2</b> AB 测试的常见应用</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#ab-测试知识体系"><i class="fa fa-check"></i><b>1.3</b> AB 测试知识体系</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html"><i class="fa fa-check"></i><b>2</b> A B 测试的统计基础</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#正太分布"><i class="fa fa-check"></i><b>2.1</b> 正太分布</a></li>
+<li class="chapter" data-level="2.2" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#二项分布"><i class="fa fa-check"></i><b>2.2</b> 二项分布</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#二项分布的定义"><i class="fa fa-check"></i><b>2.2.1</b> 1. 二项分布的定义</a></li>
+<li class="chapter" data-level="2.2.2" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#二项分布的概率公式"><i class="fa fa-check"></i><b>2.2.2</b> 2. 二项分布的概率公式</a></li>
+<li class="chapter" data-level="2.2.3" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#二项分布的期望值和方差"><i class="fa fa-check"></i><b>2.2.3</b> 3. 二项分布的期望值和方差</a></li>
+<li class="chapter" data-level="2.2.4" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#二项分布的特点"><i class="fa fa-check"></i><b>2.2.4</b> 4. 二项分布的特点</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#beta-分布"><i class="fa fa-check"></i><b>2.3</b> Beta 分布</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#beta-分布的定义"><i class="fa fa-check"></i><b>2.3.1</b> 1. Beta 分布的定义</a></li>
+<li class="chapter" data-level="2.3.2" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#beta-分布的特性"><i class="fa fa-check"></i><b>2.3.2</b> 2. Beta 分布的特性</a></li>
+<li class="chapter" data-level="2.3.3" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#beta-分布在贝叶斯统计中的应用"><i class="fa fa-check"></i><b>2.3.3</b> 3. Beta 分布在贝叶斯统计中的应用</a></li>
+<li class="chapter" data-level="2.3.4" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#beta-分布在-ab-测试中的应用"><i class="fa fa-check"></i><b>2.3.4</b> 4. Beta 分布在 A/B 测试中的应用</a></li>
+<li class="chapter" data-level="2.3.5" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#beta-分布在-ab-测试中的局限性"><i class="fa fa-check"></i><b>2.3.5</b> 5. Beta 分布在 A/B 测试中的局限性</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#中心极限定理"><i class="fa fa-check"></i><b>2.4</b> 中心极限定理</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#均值类指标的正态分布"><i class="fa fa-check"></i><b>2.4.1</b> 1. <strong>均值类指标的正态分布</strong></a></li>
+<li class="chapter" data-level="2.4.2" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#概率类指标如比例的正态近似"><i class="fa fa-check"></i><b>2.4.2</b> 2. <strong>概率类指标（如比例）的正态近似</strong></a></li>
+<li class="chapter" data-level="2.4.3" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#中心极限定理的直观解释"><i class="fa fa-check"></i><b>2.4.3</b> 中心极限定理的直观解释</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#假设检验"><i class="fa fa-check"></i><b>2.5</b> 假设检验</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#假设检验的几个关键概念"><i class="fa fa-check"></i><b>2.5.1</b> 假设检验的几个关键概念</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#用什么检验方法"><i class="fa fa-check"></i><b>2.6</b> 用什么检验方法</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#z检验z-test"><i class="fa fa-check"></i><b>2.6.1</b> 1. Z检验（Z-Test）</a></li>
+<li class="chapter" data-level="2.6.2" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#t检验t-test"><i class="fa fa-check"></i><b>2.6.2</b> 2. T检验（T-Test）</a></li>
+<li class="chapter" data-level="2.6.3" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#t-检验与-z-检验的区别总结"><i class="fa fa-check"></i><b>2.6.3</b> T 检验与 Z 检验的区别总结：</a></li>
+<li class="chapter" data-level="2.6.4" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#总结"><i class="fa fa-check"></i><b>2.6.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#p值和置信区间"><i class="fa fa-check"></i><b>2.7</b> P值和置信区间</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html"><i class="fa fa-check"></i><b>3</b> 如何确定AB实验</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#确定目标和假设"><i class="fa fa-check"></i><b>3.1</b> 确定目标和假设</a></li>
+<li class="chapter" data-level="3.2" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#测试指标"><i class="fa fa-check"></i><b>3.2</b> 测试指标</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#评价指标有哪些"><i class="fa fa-check"></i><b>3.2.1</b> 评价指标有哪些?</a></li>
+<li class="chapter" data-level="3.2.2" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#检验敏感性"><i class="fa fa-check"></i><b>3.2.2</b> 检验敏感性</a></li>
+<li class="chapter" data-level="3.2.3" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#选取具体的评价指标"><i class="fa fa-check"></i><b>3.2.3</b> 选取具体的评价指标</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#oec-overall-evaluation-criteria"><i class="fa fa-check"></i><b>3.3</b> OEC (Overall Evaluation Criteria)</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#指标的波动性"><i class="fa fa-check"></i><b>3.3.1</b> 指标的波动性</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="实验单位.html"><a href="实验单位.html"><i class="fa fa-check"></i><b>4</b> 实验单位</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="实验单位.html"><a href="实验单位.html#实验单位有哪些"><i class="fa fa-check"></i><b>4.1</b> 实验单位有哪些</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="实验单位.html"><a href="实验单位.html#用户层面-user-level"><i class="fa fa-check"></i><b>4.1.1</b> 用户层面 User Level</a></li>
+<li class="chapter" data-level="4.1.2" data-path="实验单位.html"><a href="实验单位.html#访问层面visitsession-level"><i class="fa fa-check"></i><b>4.1.2</b> 访问层面（Visit/Session Level）</a></li>
+<li class="chapter" data-level="4.1.3" data-path="实验单位.html"><a href="实验单位.html#页面层面page-level"><i class="fa fa-check"></i><b>4.1.3</b> 页面层面（Page Level）</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="实验单位.html"><a href="实验单位.html#确定实验单位的三大原则"><i class="fa fa-check"></i><b>4.2</b> 确定实验单位的三大原则</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="实验单位.html"><a href="实验单位.html#保证用户体验的连贯性"><i class="fa fa-check"></i><b>4.2.1</b> 保证用户体验的连贯性</a></li>
+<li class="chapter" data-level="4.2.2" data-path="实验单位.html"><a href="实验单位.html#实验单位要和评价指标的单位保持一致"><i class="fa fa-check"></i><b>4.2.2</b> 实验单位要和评价指标的单位保持一致</a></li>
+<li class="chapter" data-level="4.2.3" data-path="实验单位.html"><a href="实验单位.html#样本数量要尽可能多"><i class="fa fa-check"></i><b>4.2.3</b> 样本数量要尽可能多</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="样本量.html"><a href="样本量.html"><i class="fa fa-check"></i><b>5</b> 样本量</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="样本量.html"><a href="样本量.html#样本量多少为好"><i class="fa fa-check"></i><b>5.1</b> 样本量多少为好</a></li>
+<li class="chapter" data-level="5.2" data-path="样本量.html"><a href="样本量.html#功效分析"><i class="fa fa-check"></i><b>5.2</b> 功效分析</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="样本量.html"><a href="样本量.html#功效分析的作用"><i class="fa fa-check"></i><b>5.2.1</b> 功效分析的作用</a></li>
+<li class="chapter" data-level="5.2.2" data-path="样本量.html"><a href="样本量.html#功效分析的原理"><i class="fa fa-check"></i><b>5.2.2</b> 功效分析的原理</a></li>
+<li class="chapter" data-level="5.2.3" data-path="样本量.html"><a href="样本量.html#功效分析的步骤"><i class="fa fa-check"></i><b>5.2.3</b> 功效分析的步骤</a></li>
+<li class="chapter" data-level="5.2.4" data-path="样本量.html"><a href="样本量.html#功效分析的应用场景"><i class="fa fa-check"></i><b>5.2.4</b> 功效分析的应用场景</a></li>
+<li class="chapter" data-level="5.2.5" data-path="样本量.html"><a href="样本量.html#功效分析的例子"><i class="fa fa-check"></i><b>5.2.5</b> 功效分析的例子</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="样本量.html"><a href="样本量.html#如何理解-power"><i class="fa fa-check"></i><b>5.3</b> 如何理解 power</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="样本量.html"><a href="样本量.html#如何理解功效"><i class="fa fa-check"></i><b>5.3.1</b> 如何理解功效</a></li>
+<li class="chapter" data-level="5.3.2" data-path="样本量.html"><a href="样本量.html#举个例子"><i class="fa fa-check"></i><b>5.3.2</b> 举个例子</a></li>
+<li class="chapter" data-level="5.3.3" data-path="样本量.html"><a href="样本量.html#功效的计算"><i class="fa fa-check"></i><b>5.3.3</b> 功效的计算</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="样本量.html"><a href="样本量.html#显著性水平和power-的关系"><i class="fa fa-check"></i><b>5.4</b> 显著性水平和power 的关系</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="样本量.html"><a href="样本量.html#更清晰的解释"><i class="fa fa-check"></i><b>5.4.1</b> 更清晰的解释</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="样本量.html"><a href="样本量.html#功效分析参数表格"><i class="fa fa-check"></i><b>5.5</b> 功效分析参数表格</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="样本量.html"><a href="样本量.html#独立样本-t-检验independent-samples-t-test"><i class="fa fa-check"></i><b>5.5.1</b> 1. 独立样本 t 检验（Independent Samples T-Test）</a></li>
+<li class="chapter" data-level="5.5.2" data-path="样本量.html"><a href="样本量.html#配对样本-t-检验paired-samples-t-test"><i class="fa fa-check"></i><b>5.5.2</b> 2. 配对样本 t 检验（Paired Samples T-Test）</a></li>
+<li class="chapter" data-level="5.5.3" data-path="样本量.html"><a href="样本量.html#卡方检验chi-square-test"><i class="fa fa-check"></i><b>5.5.3</b> 3. 卡方检验（Chi-Square Test）</a></li>
+<li class="chapter" data-level="5.5.4" data-path="样本量.html"><a href="样本量.html#单因素方差分析one-way-anova"><i class="fa fa-check"></i><b>5.5.4</b> 4. 单因素方差分析（One-Way ANOVA）</a></li>
+<li class="chapter" data-level="5.5.5" data-path="样本量.html"><a href="样本量.html#二项检验binomial-test"><i class="fa fa-check"></i><b>5.5.5</b> 5. 二项检验（Binomial Test）</a></li>
+<li class="chapter" data-level="5.5.6" data-path="样本量.html"><a href="样本量.html#相关性检验correlation-test"><i class="fa fa-check"></i><b>5.5.6</b> 6. 相关性检验（Correlation Test）</a></li>
+<li class="chapter" data-level="5.5.7" data-path="样本量.html"><a href="样本量.html#说明"><i class="fa fa-check"></i><b>5.5.7</b> 说明</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="样本量.html"><a href="样本量.html#实验设置"><i class="fa fa-check"></i><b>5.6</b> 实验设置</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="样本量.html"><a href="样本量.html#简单随机抽样"><i class="fa fa-check"></i><b>5.6.1</b> 简单随机抽样</a></li>
+<li class="chapter" data-level="5.6.2" data-path="样本量.html"><a href="样本量.html#估算实验组和对照组评价指标的差值δ"><i class="fa fa-check"></i><b>5.6.2</b> 估算实验组和对照组评价指标的差值δ</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="什么时候可以开始检验.html"><a href="什么时候可以开始检验.html"><i class="fa fa-check"></i><b>6</b> 什么时候可以开始检验</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="什么时候可以开始检验.html"><a href="什么时候可以开始检验.html#保障统计品质的合理性检验"><i class="fa fa-check"></i><b>6.1</b> 保障统计品质的合理性检验</a></li>
+<li class="chapter" data-level="6.2" data-path="什么时候可以开始检验.html"><a href="什么时候可以开始检验.html#分析结果"><i class="fa fa-check"></i><b>6.2</b> 分析结果</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html"><i class="fa fa-check"></i><b>7</b> 如何搭建规范的AB测试框架</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#从业务问题出发确定ab测试的目标和假设"><i class="fa fa-check"></i><b>7.1</b> 从业务问题出发，确定A/B测试的目标和假设</a></li>
+<li class="chapter" data-level="7.2" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#确定ab测试的评价指标"><i class="fa fa-check"></i><b>7.2</b> 确定A/B测试的评价指标</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#第一个问题如何定义实验中的用户"><i class="fa fa-check"></i><b>7.2.1</b> 第一个问题，如何定义“实验中的用户”？</a></li>
+<li class="chapter" data-level="7.2.2" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#第二个问题如何确定用户从触发弹窗开始到最终使用功能的时间窗口期呢"><i class="fa fa-check"></i><b>7.2.2</b> 第二个问题，如何确定用户从触发弹窗开始到最终使用功能的时间窗口期呢？</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#选取实验对象的单位"><i class="fa fa-check"></i><b>7.3</b> 选取实验对象的单位</a></li>
+<li class="chapter" data-level="7.4" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#计算所需的样本大小和实验所需时间"><i class="fa fa-check"></i><b>7.4</b> 计算所需的样本大小和实验所需时间</a></li>
+<li class="chapter" data-level="7.5" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#分析测试结果"><i class="fa fa-check"></i><b>7.5</b> 分析测试结果</a></li>
+<li class="chapter" data-level="7.6" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#总结-1"><i class="fa fa-check"></i><b>7.6</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html"><i class="fa fa-check"></i><b>8</b> 如果结果不显著怎么办</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#为什么会出现实验结果不显著"><i class="fa fa-check"></i><b>8.1</b> 为什么会出现“实验结果不显著”？</a></li>
+<li class="chapter" data-level="8.2" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#如何通过增加样本量来提高power"><i class="fa fa-check"></i><b>8.2</b> 如何通过增加样本量来提高Power？</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#延长测试时间"><i class="fa fa-check"></i><b>8.2.1</b> 延长测试时间</a></li>
+<li class="chapter" data-level="8.2.2" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#增加测试使用流量在总流量中的占比"><i class="fa fa-check"></i><b>8.2.2</b> 增加测试使用流量在总流量中的占比</a></li>
+<li class="chapter" data-level="8.2.3" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#多个测试共用同一个对照组"><i class="fa fa-check"></i><b>8.2.3</b> 多个测试共用同一个对照组</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#如何通过减小方差来提高power"><i class="fa fa-check"></i><b>8.3</b> 如何通过减小方差来提高Power？</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#减小指标的方差"><i class="fa fa-check"></i><b>8.3.1</b> 减小指标的方差</a></li>
+<li class="chapter" data-level="8.3.2" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#第二种方式选用方差较小的指标"><i class="fa fa-check"></i><b>8.3.2</b> 第二种方式：选用方差较小的指标。</a></li>
+<li class="chapter" data-level="8.3.3" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#倾向评分匹配propensity-score-matching"><i class="fa fa-check"></i><b>8.3.3</b> 倾向评分匹配（Propensity Score Matching）</a></li>
+<li class="chapter" data-level="8.3.4" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#在触发阶段计算指标"><i class="fa fa-check"></i><b>8.3.4</b> 在触发阶段计算指标</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#小结"><i class="fa fa-check"></i><b>8.4</b> 小结</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="常见问题.html"><a href="常见问题.html"><i class="fa fa-check"></i><b>9</b> 常见问题</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="常见问题.html"><a href="常见问题.html#多重检验问题multiple-testing-problem"><i class="fa fa-check"></i><b>9.1</b> 多重检验问题（Multiple Testing Problem）</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="常见问题.html"><a href="常见问题.html#多重检验为什么会是一个问题"><i class="fa fa-check"></i><b>9.1.1</b> 多重检验为什么会是一个问题？</a></li>
+<li class="chapter" data-level="9.1.2" data-path="常见问题.html"><a href="常见问题.html#什么时候会遇到多重检验问题"><i class="fa fa-check"></i><b>9.1.2</b> 什么时候会遇到多重检验问题？</a></li>
+<li class="chapter" data-level="9.1.3" data-path="常见问题.html"><a href="常见问题.html#如何解决多重检验问题"><i class="fa fa-check"></i><b>9.1.3</b> 如何解决多重检验问题？</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="常见问题.html"><a href="常见问题.html#学习效应learning-effect"><i class="fa fa-check"></i><b>9.2</b> 学习效应(Learning Effect)</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="常见问题.html"><a href="常见问题.html#学习效应在实践中有哪些表现形式"><i class="fa fa-check"></i><b>9.2.1</b> 学习效应在实践中有哪些表现形式？</a></li>
+<li class="chapter" data-level="9.2.2" data-path="常见问题.html"><a href="常见问题.html#学习效应该如何检测"><i class="fa fa-check"></i><b>9.2.2</b> 学习效应该如何检测？</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="常见问题.html"><a href="常见问题.html#辛普森悖论"><i class="fa fa-check"></i><b>9.3</b> 辛普森悖论</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="常见问题.html"><a href="常见问题.html#数学描述"><i class="fa fa-check"></i><b>9.3.1</b> 数学描述</a></li>
+<li class="chapter" data-level="9.3.2" data-path="常见问题.html"><a href="常见问题.html#示例"><i class="fa fa-check"></i><b>9.3.2</b> 示例</a></li>
+<li class="chapter" data-level="9.3.3" data-path="常见问题.html"><a href="常见问题.html#辛普森悖论的关键原因"><i class="fa fa-check"></i><b>9.3.3</b> 辛普森悖论的关键原因</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="常见问题.html"><a href="常见问题.html#实验组和对照组要相互独立"><i class="fa fa-check"></i><b>9.4</b> 实验组和对照组要相互独立</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="常见问题.html"><a href="常见问题.html#破坏两组独立性的表现形式有哪些"><i class="fa fa-check"></i><b>9.4.1</b> 破坏两组独立性的表现形式有哪些？</a></li>
+<li class="chapter" data-level="9.4.2" data-path="常见问题.html"><a href="常见问题.html#如何避免破坏两组的独立性"><i class="fa fa-check"></i><b>9.4.2</b> 如何避免破坏两组的独立性？</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html"><i class="fa fa-check"></i><b>10</b> 什么时候不适合AB测试</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#当没有办法控制想要测试的变量时"><i class="fa fa-check"></i><b>10.1</b> 当没有办法控制想要测试的变量时</a></li>
+<li class="chapter" data-level="10.2" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#当有重大事件发布时"><i class="fa fa-check"></i><b>10.2</b> 当有重大事件发布时</a></li>
+<li class="chapter" data-level="10.3" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#用户量很少的时候"><i class="fa fa-check"></i><b>10.3</b> 用户量很少的时候</a></li>
+<li class="chapter" data-level="10.4" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#ab-测试替代方法"><i class="fa fa-check"></i><b>10.4</b> AB 测试替代方法</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#因果推断"><i class="fa fa-check"></i><b>10.4.1</b> 因果推断</a></li>
+<li class="chapter" data-level="10.4.2" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#用户研究"><i class="fa fa-check"></i><b>10.4.2</b> 用户研究</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#知识点总结"><i class="fa fa-check"></i><b>10.5</b> 知识点总结</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="构建一个shiny-的样本计算器.html"><a href="构建一个shiny-的样本计算器.html"><i class="fa fa-check"></i><b>11</b> 构建一个Shiny 的样本计算器</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/liamamilin" target="blank">AB测试实战</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">AB 测试实战</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="a-b-测试的统计基础" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> A B 测试的统计基础<a href="a-b-测试的统计基础.html#a-b-测试的统计基础" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>A/B测试的理论基础是假设检验（Hypothesis Testing）。可以说，假设检验，贯穿了A/B测试从实验设计到分析测试结果的整个流程。什么是假设检验, 相比只要学习过统计学的同学都知道. 参考我写的书《R语言统计分析实战》 如果要一句话解释“假设检验”的话，就是选取一种合适的检验方法，去验证在A/B测试中我们提出的假设是否正确。现在，你只要知道“假设检验”中，最重要也最核心的是“检验”就可以了，因为选取哪种检验方法，取决于指标的统计属性。</p>
+<p>在实际业务中，我们常用的指标其实就是两类：</p>
+<ul>
+<li>均值类的指标，比如用户的平均使用时长、平均购买金额、平均购买频率，等等。</li>
+<li>概率类的指标，比如用户点击的概率（点击率）、转化的概率（转化率）、购买的概率（购买率），等等。</li>
+</ul>
+<p>AB 测试通常是对上面所说的两类进行假设检验, 但是假设检验做的事情远远超过了这两种, 例如, 正态性检验. 所以可以说, AB 测试 是 假设检验 中的一个子集 .</p>
+<p>这些指标都是用来表征用户行为的。而用户的行为是非常随机的，这也就意味着这些指标是由一系列随机事件组成的变量，也就是统计学中的随机变量（Random Variable）。</p>
+<p>“随机”就代表着可以取不同的数值。比如，一款社交App每天的使用时间，对轻度用户来说可能不到1小时，而对重度用户来说可能是4、5小时以上。那么问题来了，在统计学中，怎么表征呢？</p>
+<p>没错，我们可以用概率分布（Probability Distribution），来表征随机变量取不同值的概率和范围。所以，A/B测试指标的统计属性，其实就是要看这些指标到底服从什么概率分布。</p>
+<p>不过需要注意的是, 在数量足够大时，均值类指标服从正态分布；概率类指标本质上服从二项分布，但当数量足够大时，也服从正态分布。</p>
+<div id="正太分布" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> 正太分布<a href="a-b-测试的统计基础.html#正太分布" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>正态分布（Normal Distribution），也称为“高斯分布”或“钟形分布”，是一种在统计学和概率论中非常重要的连续概率分布。其曲线呈对称的钟形，中间高、两端低，反映出大多数数据集中在平均值附近，离平均值越远，数据点的概率就越低。正态分布是许多自然现象的数学模型，例如人的身高、智商、测量误差等，都近似满足正态分布。</p>
+<p><img src="https://cdn.mathpix.com/snip/images/GJslkQ58MVp889dZcrO6DB0HkV7odgVLHkGljY1r7u0.original.fullsize.png" /></p>
+<p><img src="https://lianglianglee.com/%e4%b8%93%e6%a0%8f/AB%20%e6%b5%8b%e8%af%95%e4%bb%8e%200%20%e5%88%b0%201/assets/5a3be5686a6a4f14b9dc973864a7d644.jpg" /></p>
+<p>直方图是表征随机变量分布的图表，其中横轴为x可能的取值，纵轴为每个值出现的概率。通过直方图你可以看到，距离平均值μ越近的值出现的概率越高。</p>
+</div>
+<div id="二项分布" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> 二项分布<a href="a-b-测试的统计基础.html#二项分布" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>业务中的概率类指标，具体到用户行为时，结果只有两种：要么发生，要么不发生。比如点击率，就是用来表征用户在线上点击特定内容的概率，一个用户要么点击，要么不点击，不会有第三种结果发生。</p>
+<p>这种只有两种结果的事件叫做二元事件（Binary Event）。二元事件在生活中很常见，比如掷硬币时只会出现正面或者反面这两种结果，所以统计学中有专门有一个描述二元事件概率分布的术语，也就是二项分布（Binomial Distribution）。</p>
+<p>这里我们还是结合着社交App的例子，来学习下二元分布。</p>
+<p>这款社交App在网上投放了广告，来吸引人们点击广告从而下载App。现在我们想通过数据看看App下载率的分布情况：</p>
+<p>下载率 = 通过广告下载App的用户数量 / 看到广告的用户数量。</p>
+<p>因为单个二元事件的结果，只能是发生或者不发生，发生的概率要么是100%要么是0%，所以我们要分析下载率就必须把数据进行一定程度的聚合。这里，我们就以分钟为单位来举例，先计算每分钟的下载率，再看它们的概率分布。</p>
+<p>我们有一个月的用户及下载数据，一个月一共有43200分钟（60<em>24</em>30），因为我们关注的是每分钟的下载率，所以一共有43200个数据点。通过数据分析发现，每分钟平均有10个人会看到广告，下载率集中分布在0-30%之间。</p>
+<p><img src="https://lianglianglee.com/%e4%b8%93%e6%a0%8f/AB%20%e6%b5%8b%e8%af%95%e4%bb%8e%200%20%e5%88%b0%201/assets/c1f27c645f594658869cfdc7911d93dc.jpg" /></p>
+<p>你可能会说，概率在某种程度上也是平均值，可以把这里的下载率理解为“看到广告的用户的平均下载量”，那我们已经有43200个数据点了，样本量远远大于30，但为什么下载率的分布没有像中心极限定理说的那样趋近于正态分布呢？</p>
+<p>这是因为在二项分布中，中心极限定理说的样本量，指的是计算概率的样本量。在社交App的例子中，概率的样本量是10，因为平均每分钟有10人看到广告，还没有达到中心极限定理中说的30这个阈值。所以，我们现在要提高这个样本量，才能使下载率的分布趋近正态分布。</p>
+<p>提高样本量的方法也很简单，可以计算每小时的下载率。因为每小时平均有600人看到广告，这样我们的样本量就从10提高到了600。下图是每小时下载率的概率分布：</p>
+<p><img src="https://lianglianglee.com/%e4%b8%93%e6%a0%8f/AB%20%e6%b5%8b%e8%af%95%e4%bb%8e%200%20%e5%88%b0%201/assets/b504c57279774111afa41caaacbf739b.jpg" />
+现在再看这张直方图，每小时下载率的分布是不是就趋近于正态分布了.</p>
+<p><strong>二项分布</strong>（Binomial Distribution）是一个离散概率分布，用于描述在<strong>固定次数的独立试验中，成功出现的次数的概率</strong>。每次试验只有两个可能的结果：成功或失败（可以理解为“是/否”或“1/0”）。二项分布广泛应用于统计学中，尤其是在概率计算和数据分析中，用来描述那些具有二元结果的现象，例如掷硬币、抽卡、质量控制等场景。</p>
+<div id="二项分布的定义" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> 1. 二项分布的定义<a href="a-b-测试的统计基础.html#二项分布的定义" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>假设有一个试验：
+- <strong>试验次数</strong>为 <span class="math inline">\(n\)</span>（即重复试验的次数）；
+- <strong>成功的概率</strong>为 <span class="math inline">\(p\)</span>（每次试验成功的概率是相同的）。</p>
+<p>二项分布表示在 <span class="math inline">\(n\)</span> 次独立试验中，成功出现 <strong>k</strong> 次的概率。</p>
+</div>
+<div id="二项分布的概率公式" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> 2. 二项分布的概率公式<a href="a-b-测试的统计基础.html#二项分布的概率公式" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>二项分布的概率质量函数（PMF）为：</p>
+<p><span class="math display">\[
+P(X = k) = \binom{n}{k} p^k (1 - p)^{n - k}
+\]</span></p>
+<p>其中：
+- <span class="math inline">\(X\)</span>：表示成功出现的次数，是一个随机变量；
+- <span class="math inline">\(k\)</span>：表示成功次数的特定值（0 ≤ k ≤ n）；
+- <span class="math inline">\(n\)</span>：试验的总次数；
+- <span class="math inline">\(p\)</span>：每次试验成功的概率；
+- <span class="math inline">\(\binom{n}{k}\)</span>：组合数，表示从 <span class="math inline">\(n\)</span> 次试验中选出 <span class="math inline">\(k\)</span> 次成功的可能方式数，计算公式为 <span class="math inline">\(\binom{n}{k} = \frac{n!}{k!(n - k)!}\)</span>。</p>
+</div>
+<div id="二项分布的期望值和方差" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> 3. 二项分布的期望值和方差<a href="a-b-测试的统计基础.html#二项分布的期望值和方差" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>对于二项分布 <span class="math inline">\(X \sim \text{Binomial}(n, p)\)</span>，其期望值（均值）和方差为：
+- <strong>期望值</strong> <span class="math inline">\(E(X) = np\)</span>
+- <strong>方差</strong> <span class="math inline">\(\text{Var}(X) = np(1 - p)\)</span></p>
+<p>这意味着在 <span class="math inline">\(n\)</span> 次试验中，成功出现的平均次数为 <span class="math inline">\(np\)</span>，且方差为 <span class="math inline">\(np(1 - p)\)</span>。</p>
+</div>
+<div id="二项分布的特点" class="section level3 hasAnchor" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> 4. 二项分布的特点<a href="a-b-测试的统计基础.html#二项分布的特点" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>离散性</strong>：二项分布是离散的，定义在非负整数（即成功的次数）上。</li>
+<li><strong>对称性</strong>：当 <span class="math inline">\(p = 0.5\)</span> 时，二项分布是对称的。当 <span class="math inline">\(p\)</span> 接近 0 或 1 时，二项分布变得偏斜。</li>
+<li><strong>收敛性</strong>：根据<strong>中心极限定理</strong>，当 <span class="math inline">\(n\)</span> 足够大时，二项分布可以被正态分布近似描述。通常在 <span class="math inline">\(np\)</span> 和 <span class="math inline">\(n(1 - p)\)</span> 都大于 5 时，这种近似较为准确。</li>
+</ul>
+</div>
+</div>
+<div id="beta-分布" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Beta 分布<a href="a-b-测试的统计基础.html#beta-分布" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Beta 分布</strong>是一种连续概率分布，定义在区间 [0, 1] 上，广泛用于表示事件的概率。它有两个形状参数 <span class="math inline">\(\alpha\)</span> 和 <span class="math inline">\(\beta\)</span>，可以灵活地改变其形状，因此非常适合描述概率的先验分布或不确定性。Beta 分布在<strong>贝叶斯统计</strong>和<strong>A/B 测试</strong>中有着重要应用，尤其是在分析比例或概率的场景中。</p>
+<div id="beta-分布的定义" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> 1. Beta 分布的定义<a href="a-b-测试的统计基础.html#beta-分布的定义" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Beta 分布的概率密度函数（PDF）为：</p>
+<p><span class="math display">\[
+f(x; \alpha, \beta) = \frac{x^{\alpha - 1} (1 - x)^{\beta - 1}}{\mathrm{B}(\alpha, \beta)}, \quad \text{其中 } x \in [0, 1]
+\]</span></p>
+<p>其中：
+- <span class="math inline">\(x\)</span>：随机变量，取值范围为 [0, 1]。
+- <span class="math inline">\(\alpha\)</span> 和 <span class="math inline">\(\beta\)</span>：Beta 分布的形状参数，控制分布的形状。
+- <span class="math inline">\(\mathrm{B}(\alpha, \beta)\)</span>：Beta 函数，是归一化常数，保证分布的积分为 1。</p>
+</div>
+<div id="beta-分布的特性" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> 2. Beta 分布的特性<a href="a-b-测试的统计基础.html#beta-分布的特性" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>均值</strong>：<span class="math inline">\(\frac{\alpha}{\alpha + \beta}\)</span></li>
+<li><strong>方差</strong>：<span class="math inline">\(\frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha + \beta + 1)}\)</span></li>
+<li><strong>形状</strong>：参数 <span class="math inline">\(\alpha\)</span> 和 <span class="math inline">\(\beta\)</span> 决定了 Beta 分布的形状。根据不同的参数值，Beta 分布可以是对称、偏斜，甚至呈现 U 形或 J 形分布。例如：
+<ul>
+<li>当 <span class="math inline">\(\alpha = \beta = 1\)</span> 时，Beta 分布是均匀分布。</li>
+<li>当 <span class="math inline">\(\alpha &gt; 1\)</span> 且 <span class="math inline">\(\beta &gt; 1\)</span> 时，分布呈钟形。</li>
+<li>当 <span class="math inline">\(\alpha &gt; 1\)</span> 且 <span class="math inline">\(\beta &lt; 1\)</span> 时，分布偏向 1。</li>
+<li>当 <span class="math inline">\(\alpha &lt; 1\)</span> 且 <span class="math inline">\(\beta &gt; 1\)</span> 时，分布偏向 0。</li>
+</ul></li>
+</ul>
+</div>
+<div id="beta-分布在贝叶斯统计中的应用" class="section level3 hasAnchor" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> 3. Beta 分布在贝叶斯统计中的应用<a href="a-b-测试的统计基础.html#beta-分布在贝叶斯统计中的应用" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Beta 分布常被用于<strong>贝叶斯统计</strong>中的先验分布，因为它适合表示<strong>概率</strong>这种不确定性。特别地，Beta 分布与<strong>二项分布</strong>是共轭的，即当观测数据服从二项分布时，先验分布选择 Beta 分布，更新后的后验分布仍然是 Beta 分布。这一特性使得计算方便，同时便于解释。</p>
+</div>
+<div id="beta-分布在-ab-测试中的应用" class="section level3 hasAnchor" number="2.3.4">
+<h3><span class="header-section-number">2.3.4</span> 4. Beta 分布在 A/B 测试中的应用<a href="a-b-测试的统计基础.html#beta-分布在-ab-测试中的应用" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>在 A/B 测试中，我们通常希望估计两个版本（A 版本和 B 版本）中某个事件的发生概率（例如点击率、转化率）。Beta 分布在 A/B 测试中具有广泛的应用，因为它能为成功率提供一个自然的建模框架。</p>
+<div id="ab-测试中的应用步骤" class="section level4 hasAnchor" number="2.3.4.1">
+<h4><span class="header-section-number">2.3.4.1</span> A/B 测试中的应用步骤<a href="a-b-测试的统计基础.html#ab-测试中的应用步骤" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li><strong>设定 Beta 分布的先验分布</strong>：
+<ul>
+<li>在开始测试前，我们通常会选择一个先验分布。例如，可以选择 <span class="math inline">\(\alpha = 1\)</span> 和 <span class="math inline">\(\beta = 1\)</span>（均匀分布），表示对 A 和 B 版本的转化率一无所知。如果有历史数据，也可以用历史数据更新先验分布。</li>
+</ul></li>
+<li><strong>观察数据，更新后验分布</strong>：
+<ul>
+<li>假设在 A 版本中，有 <span class="math inline">\(s_A\)</span> 次成功（例如点击或转化），共进行了 <span class="math inline">\(n_A\)</span> 次试验（例如展示次数），那么我们可以用二项分布的结果来更新 Beta 分布的参数。</li>
+<li>对于 A 版本的转化率的后验分布，可以表示为 Beta 分布 <span class="math inline">\(\text{Beta}(\alpha + s_A, \beta + n_A - s_A)\)</span>。</li>
+<li>类似地，B 版本的后验分布为 <span class="math inline">\(\text{Beta}(\alpha + s_B, \beta + n_B - s_B)\)</span>。</li>
+</ul></li>
+<li><strong>计算后验分布的均值和可信区间</strong>：
+<ul>
+<li>在得到后验分布后，我们可以计算 A 和 B 版本的转化率的均值和可信区间，用来判断哪个版本表现更好。</li>
+<li>例如，可以计算出 B 版本的转化率大于 A 版本的概率（即 <span class="math inline">\(P(\text{conversion}_B &gt; \text{conversion}_A)\)</span>），从而得出判断结果。</li>
+</ul></li>
+<li><strong>做出决策</strong>：
+<ul>
+<li>如果 <span class="math inline">\(P(\text{conversion}_B &gt; \text{conversion}_A)\)</span> 足够大（如超过 95%），则可以认为 B 版本的转化率显著高于 A 版本，选择 B 版本。</li>
+<li>否则，可以继续测试或选择转化率较高的版本。</li>
+</ul></li>
+</ol>
+</div>
+<div id="优势" class="section level4 hasAnchor" number="2.3.4.2">
+<h4><span class="header-section-number">2.3.4.2</span> 优势<a href="a-b-测试的统计基础.html#优势" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>直观且便于解释</strong>：Beta 分布提供了概率的后验分布，可以直观地看到测试数据对概率的影响。</li>
+<li><strong>可计算的置信度</strong>：可以计算某个版本的成功概率高于另一个版本的概率（例如 <span class="math inline">\(P(\text{conversion}_B &gt; \text{conversion}_A)\)</span>），便于做出决策。</li>
+<li><strong>灵活性</strong>：在有新数据时，可以简单地更新后验分布，使得整个过程具有动态性。</li>
+</ul>
+</div>
+</div>
+<div id="beta-分布在-ab-测试中的局限性" class="section level3 hasAnchor" number="2.3.5">
+<h3><span class="header-section-number">2.3.5</span> 5. Beta 分布在 A/B 测试中的局限性<a href="a-b-测试的统计基础.html#beta-分布在-ab-测试中的局限性" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>计算复杂性</strong>：尽管 Beta 分布计算方便，但对于非常大规模的数据，计算后验分布的参数更新依然复杂。</li>
+<li><strong>假设限制</strong>：Beta 分布仅适合描述 0 和 1 之间的概率，不适用于连续数据或非二项分布的情况。</li>
+<li><strong>对先验的依赖性</strong>：先验分布的选择会影响结果，尤其是当样本量较小时，选择不当的先验分布可能会带来偏差。</li>
+</ul>
+</div>
+</div>
+<div id="中心极限定理" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> 中心极限定理<a href="a-b-测试的统计基础.html#中心极限定理" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>中心极限定律和大数定律是统计中非常非常重要的两个定律.</p>
+<ol style="list-style-type: decimal">
+<li>大数定律（Law of Large Numbers）是概率论中的一个重要定理，它描述了在样本量逐渐增大的情况下，样本均值会趋向于总体均值。大数定律解释了为什么我们通过大量观察或实验，可以得出一个稳定的结果 . 大数定律的核心思想是：当样本量足够大时，样本的平均值会趋于真实的总体均值.</li>
+<li>中心极限定理的核心在于<strong>“独立随机变量的和的分布会趋向于正态分布”</strong>，无论这些变量的原始分布是什么。</li>
+</ol>
+<div id="均值类指标的正态分布" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> 1. <strong>均值类指标的正态分布</strong><a href="a-b-测试的统计基础.html#均值类指标的正态分布" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>假设我们有一个任意分布的总体，均值为 <span class="math inline">\(\mu\)</span>，方差为 <span class="math inline">\(\sigma^2\)</span>，从中抽取一个样本量为 <span class="math inline">\(n\)</span> 的样本，计算该样本的均值（或其他中心位置的统计量）。根据<strong>中心极限定理</strong>，当样本量 <span class="math inline">\(n\)</span> 足够大时，这个样本均值的分布将会接近正态分布，即使原始数据的分布不是正态的。具体来说：</p>
+<ul>
+<li>样本均值的分布趋近于一个均值为 <span class="math inline">\(\mu\)</span>、方差为 <span class="math inline">\(\sigma^2 / n\)</span> 的正态分布。</li>
+<li>这种收敛现象与原始分布的形状无关，只要样本量足够大，就会趋近于正态分布。</li>
+</ul>
+<p>这是因为当我们增加样本量 <span class="math inline">\(n\)</span> 时，样本均值的波动会因为相互之间的“平滑”作用而变得接近正态分布。这也解释了为什么在实际中，我们往往可以用正态分布来估计和推断均值类指标的分布。</p>
+</div>
+<div id="概率类指标如比例的正态近似" class="section level3 hasAnchor" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> 2. <strong>概率类指标（如比例）的正态近似</strong><a href="a-b-测试的统计基础.html#概率类指标如比例的正态近似" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>概率类指标，例如一个事件发生的比例，本质上是一个<strong>二项分布</strong>。二项分布描述了在 <span class="math inline">\(n\)</span> 次试验中，某个事件发生 <span class="math inline">\(k\)</span> 次的概率。当 <span class="math inline">\(n\)</span> 较小时，二项分布是一个离散的概率分布，不符合正态分布的形状。但是，当样本量 <span class="math inline">\(n\)</span> 足够大时，二项分布可以被近似为正态分布。</p>
+<p>这是因为在<strong>二项分布</strong>中，如果成功概率为 <span class="math inline">\(p\)</span>，失败概率为 <span class="math inline">\(1 - p\)</span>，则二项分布的均值为 <span class="math inline">\(np\)</span>，方差为 <span class="math inline">\(np(1 - p)\)</span>。当 <span class="math inline">\(n\)</span> 越来越大时，二项分布的形状会变得越来越平滑，接近钟形曲线。根据<strong>中心极限定理</strong>，当 <span class="math inline">\(n\)</span> 足够大时，<strong>标准化</strong>后的二项分布会趋向于正态分布。具体而言：</p>
+<p><span class="math display">\[
+\frac{X - np}{\sqrt{np(1 - p)}} \approx N(0, 1)
+\]</span></p>
+<p>这意味着，当 <span class="math inline">\(n\)</span> 较大时，我们可以用正态分布 <span class="math inline">\(N(np, np(1 - p))\)</span> 来近似描述二项分布。这个近似在 <span class="math inline">\(p\)</span> 不太接近 0 或 1 时尤为准确。</p>
+</div>
+<div id="中心极限定理的直观解释" class="section level3 hasAnchor" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> 中心极限定理的直观解释<a href="a-b-测试的统计基础.html#中心极限定理的直观解释" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>中心极限定理的核心在于<strong>“独立随机变量的和的分布会趋向于正态分布”</strong>，无论这些变量的原始分布是什么。这是因为在样本量增大时，随机波动会相互抵消、平滑，导致整体分布趋向正态。例如，在进行抛硬币实验时，每次的结果只有正反面两种可能性（离散的二项分布），但随着抛掷次数的增多，正反面的比例将越来越稳定，最后近似服从于正态分布。</p>
+</div>
+</div>
+<div id="假设检验" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> 假设检验<a href="a-b-测试的统计基础.html#假设检验" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>关于假设检验, 在我写的《R语言统计分析实战》有过讲解. 假设检验的思想其实非常朴素, 假设我和你玩抛硬币, 抛10次看谁赢得多, 结果显示10次我都赢了. 这个时候你会觉得我作弊了. 你做出这个判断的过程就是假设检验，这个比喻非常形象地解释了<strong>假设检验</strong>的核心思想！假设检验的本质就是通过观察数据结果，来判断一个初始假设（零假设）是否合理。</p>
+<p>在这个例子中：</p>
+<ol style="list-style-type: decimal">
+<li><strong>零假设（<span class="math inline">\(H_0\)</span>）</strong>：假设硬币是公平的，也就是每次抛硬币时，我们两个胜负的概率是均等的（50%）。</li>
+<li><strong>备择假设（<span class="math inline">\(H_1\)</span>）</strong>：假设硬币不公平，也就是说我有作弊的嫌疑，导致我赢的概率比你高。</li>
+<li><strong>观察数据</strong>：我们进行了10次实验，而我每次都赢了，得到了10次胜利的结果。</li>
+<li><strong>判断异常性</strong>：在公平的情况下，连续10次我都赢的概率极低。我们可以计算出这个概率是 <span class="math inline">\((0.5)^{10} = 0.00098\)</span>，即不到0.1%。这样的结果发生的可能性太小，所以我们会怀疑零假设不成立。</li>
+<li><strong>得出结论</strong>：由于观察到的结果太极端，我们倾向于拒绝零假设，认为硬币可能不公平（我有作弊的嫌疑）。</li>
+</ol>
+<p>这个过程就是典型的假设检验过程。<strong>假设检验的思路</strong>非常简单朴素：<strong>先假设一个合理的状态（零假设），然后根据实验数据判断这种假设是否极不可能发生</strong>。如果极不可能发生，我们就有理由怀疑这个假设不成立，从而接受备择假设。</p>
+<div id="假设检验的几个关键概念" class="section level3 hasAnchor" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> 假设检验的几个关键概念<a href="a-b-测试的统计基础.html#假设检验的几个关键概念" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>显著性水平（<span class="math inline">\(\alpha\)</span>）</strong>：通常我们设定一个临界值（例如 5%），如果结果出现的概率低于这个临界值，就认为结果显著，拒绝零假设。</li>
+<li><strong>p 值</strong>：实际观测结果的概率。如果 p 值小于设定的显著性水平，就说明结果显著，可以拒绝零假设。</li>
+<li><strong>错误类型</strong>：假设检验中存在犯错的可能：
+<ul>
+<li><strong>第一类错误</strong>：错误地拒绝了真实的零假设。</li>
+<li><strong>第二类错误</strong>：错误地接受了错误的零假设。</li>
+</ul></li>
+</ul>
+<p><img src="https://lianglianglee.com/%e4%b8%93%e6%a0%8f/AB%20%e6%b5%8b%e8%af%95%e4%bb%8e%200%20%e5%88%b0%201/assets/f9224feb52fd490b850ff4690d43b48d.jpg" /></p>
+<p>假设检验中的原假设通常是“无差异”或“无显著关系”。通过验证这个假设，统计学家可以判断是否有足够的证据来拒绝它，从而支持“有差异”或“有关系”的备择假设。这种方法保证了假设检验的客观性和科学性。 我门看一个例子:</p>
+<p>H0 : 我没患心脏病病
+H1 : 我患有心脏病</p>
+<ul>
+<li>我没有心脏病, 但是假设检验P值很小,拒绝原假设, 这个时候就第一类错误(False positive)</li>
+<li>我有病, 但是p值很大, 不能拒绝原假设, 就是第二类错误(False Negative)</li>
+</ul>
+</div>
+</div>
+<div id="用什么检验方法" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> 用什么检验方法<a href="a-b-测试的统计基础.html#用什么检验方法" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><img src="https://lianglianglee.com/%e4%b8%93%e6%a0%8f/AB%20%e6%b5%8b%e8%af%95%e4%bb%8e%200%20%e5%88%b0%201/assets/e8969a29a2ce40e0a58a01d4de4d9f8e.jpg" /></p>
+<p>均值类指标一般用T检验，概率类指标一般用Z检验（比例检验）。</p>
+<p><strong>T检验</strong>和<strong>Z检验</strong>是两种常用的统计检验方法，用于比较两个数据集的均值差异是否显著。这两种检验在研究假设检验和统计推断时非常常见，虽然它们在本质上都用于均值的比较，但适用的条件有所不同。</p>
+<div id="z检验z-test" class="section level3 hasAnchor" number="2.6.1">
+<h3><span class="header-section-number">2.6.1</span> 1. Z检验（Z-Test）<a href="a-b-测试的统计基础.html#z检验z-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Z检验</strong>通常用于<strong>样本量较大</strong>且<strong>总体标准差已知</strong>的情况下。它假设数据来自正态分布或样本量足够大以满足正态性（根据<strong>中心极限定理</strong>，当样本量足够大时，均值分布趋近于正态分布）。Z检验的假设较为严格，但当样本量较大时，结果会非常可靠。</p>
+<div id="z检验的应用场景" class="section level4 hasAnchor" number="2.6.1.1">
+<h4><span class="header-section-number">2.6.1.1</span> Z检验的应用场景：<a href="a-b-测试的统计基础.html#z检验的应用场景" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>样本量较大（一般认为 <span class="math inline">\(n \geq 30\)</span>）。</li>
+<li>总体标准差已知或可以近似计算。</li>
+<li>适用于检验样本均值与总体均值的差异，或者两个大样本均值的差异。</li>
+</ul>
+</div>
+<div id="z检验的计算公式" class="section level4 hasAnchor" number="2.6.1.2">
+<h4><span class="header-section-number">2.6.1.2</span> Z检验的计算公式：<a href="a-b-测试的统计基础.html#z检验的计算公式" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Z检验统计量的公式为：</p>
+<p><span class="math display">\[
+Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}}
+\]</span></p>
+<p>其中：
+- <span class="math inline">\(\bar{X}\)</span> 是样本均值；
+- <span class="math inline">\(\mu\)</span> 是总体均值；
+- <span class="math inline">\(\sigma\)</span> 是总体标准差；
+- <span class="math inline">\(n\)</span> 是样本量。</p>
+<p>计算得到的 <span class="math inline">\(Z\)</span> 值可以通过标准正态分布表查找对应的 p 值，从而判断差异是否显著。</p>
+</div>
+<div id="z检验的示例" class="section level4 hasAnchor" number="2.6.1.3">
+<h4><span class="header-section-number">2.6.1.3</span> Z检验的示例：<a href="a-b-测试的统计基础.html#z检验的示例" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>假设我们想要检验一个新药的效果，并已知过去的药物平均有效率为 70%。我们从新药试验中收集了一个大样本数据（例如 100 人），计算出新药有效率为 75%。通过 Z 检验，我们可以判断新药有效率的提升是否显著。</p>
+<hr />
+</div>
+</div>
+<div id="t检验t-test" class="section level3 hasAnchor" number="2.6.2">
+<h3><span class="header-section-number">2.6.2</span> 2. T检验（T-Test）<a href="a-b-测试的统计基础.html#t检验t-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>T检验</strong>用于<strong>样本量较小</strong>且<strong>总体标准差未知</strong>的情况。与 Z 检验不同，T 检验在小样本条件下更为准确，因为它引入了样本标准差来估计总体标准差。T检验的关键是使用 <strong>t 分布</strong>，t 分布的形状根据样本量（自由度）而变化，样本量越小，分布的尾部越“厚”。</p>
+<div id="t检验的应用场景" class="section level4 hasAnchor" number="2.6.2.1">
+<h4><span class="header-section-number">2.6.2.1</span> T检验的应用场景：<a href="a-b-测试的统计基础.html#t检验的应用场景" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>样本量较小（一般认为 <span class="math inline">\(n &lt; 30\)</span>）。</li>
+<li>总体标准差未知，需要用样本标准差进行估计。</li>
+<li>适用于单样本均值与已知值的比较、独立样本之间的均值比较、配对样本均值比较。</li>
+</ul>
+</div>
+<div id="t检验的类型" class="section level4 hasAnchor" number="2.6.2.2">
+<h4><span class="header-section-number">2.6.2.2</span> T检验的类型：<a href="a-b-测试的统计基础.html#t检验的类型" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>T检验有多种类型，适用于不同的场景：
+1. <strong>单样本 T检验</strong>（One-Sample T-Test）：用于检验样本均值与已知总体均值的差异。
+2. <strong>独立样本 T检验</strong>（Independent Two-Sample T-Test）：用于比较两个独立样本的均值差异。
+3. <strong>配对样本 T检验</strong>（Paired T-Test）：用于比较同一组对象在两个不同条件下的均值差异。</p>
+</div>
+<div id="t检验的计算公式" class="section level4 hasAnchor" number="2.6.2.3">
+<h4><span class="header-section-number">2.6.2.3</span> T检验的计算公式：<a href="a-b-测试的统计基础.html#t检验的计算公式" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>对于单样本 t 检验，t 统计量的公式为：</p>
+<p><span class="math display">\[
+t = \frac{\bar{X} - \mu}{s / \sqrt{n}}
+\]</span></p>
+<p>其中：
+- <span class="math inline">\(\bar{X}\)</span> 是样本均值；
+- <span class="math inline">\(\mu\)</span> 是总体均值；
+- <span class="math inline">\(s\)</span> 是样本标准差；
+- <span class="math inline">\(n\)</span> 是样本量。</p>
+<p>计算得到的 <span class="math inline">\(t\)</span> 值可以通过 t 分布表查找对应的 p 值，根据设定的显著性水平来判断差异是否显著。</p>
+</div>
+<div id="t检验的示例" class="section level4 hasAnchor" number="2.6.2.4">
+<h4><span class="header-section-number">2.6.2.4</span> T检验的示例：<a href="a-b-测试的统计基础.html#t检验的示例" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>假设我们想要检验某班学生的平均考试成绩是否不同于某标准成绩（例如 75 分），样本量只有 20 人。由于样本量小且总体标准差未知，我们可以使用单样本 T 检验来判断班级均分是否显著高于或低于 75 分。</p>
+<hr />
+</div>
+</div>
+<div id="t-检验与-z-检验的区别总结" class="section level3 hasAnchor" number="2.6.3">
+<h3><span class="header-section-number">2.6.3</span> T 检验与 Z 检验的区别总结：<a href="a-b-测试的统计基础.html#t-检验与-z-检验的区别总结" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="38%" />
+<col width="38%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>特点</th>
+<th>T检验</th>
+<th>Z检验</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>适用条件</td>
+<td>样本量较小，且总体标准差未知</td>
+<td>样本量较大，总体标准差已知</td>
+</tr>
+<tr class="even">
+<td>使用的分布</td>
+<td>t 分布</td>
+<td>标准正态分布</td>
+</tr>
+<tr class="odd">
+<td>适用场景</td>
+<td>小样本的均值比较</td>
+<td>大样本的均值或比例比较</td>
+</tr>
+<tr class="even">
+<td>自由度</td>
+<td>自由度为 <span class="math inline">\(n - 1\)</span></td>
+<td>无需考虑自由度</td>
+</tr>
+<tr class="odd">
+<td>假设</td>
+<td>样本数据服从正态分布或接近正态分布</td>
+<td>样本数据服从正态分布或样本量足够大</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="总结" class="section level3 hasAnchor" number="2.6.4">
+<h3><span class="header-section-number">2.6.4</span> 总结<a href="a-b-测试的统计基础.html#总结" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>T检验</strong>适用于小样本、总体标准差未知的情况，依赖 t 分布来进行统计推断。</li>
+<li><strong>Z检验</strong>适用于大样本或已知总体标准差的情况，依赖标准正态分布来进行统计推断。</li>
+</ul>
+<p>在实际应用中，如果样本量较大且总体标准差未知，T检验和Z检验的结果差异不大，因为 t 分布在样本量增加时接近标准正态分布，因此可以用 Z 检验近似代替 T 检验。</p>
+</div>
+</div>
+<div id="p值和置信区间" class="section level2 hasAnchor" number="2.7">
+<h2><span class="header-section-number">2.7</span> P值和置信区间<a href="a-b-测试的统计基础.html#p值和置信区间" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>在统计上，P值就是当零假设成立时，我们所观测到的样本数据出现的概率。在A/B测试的语境下，P值就是当对照组和实验组指标事实上是相同时，在A/B测试中用样本数据所观测到的“实验组和对照组指标不同”出现的概率。</p>
+<p>如果我们在A/B测试中观测到“实验组和对照组指标不同”的概率（P值）很小，比如小于5%，是个小概率事件，虽然这在零假设成立时不太可能发生，但是确实被我们观测到了，所以肯定是我们的零假设出了问题。那么，这个时候就应该拒绝零假设，接受备择假设，即两组指标是不同的。</p>
+<p>与此相反的是，当我们在A/B测试中观测到“实验组和对照组指标不同”的概率（P值）很大，比如70%，那么在零假设成立时，我们观测到这个事件还是很有可能的。所以这个时候我们接受零假设，拒绝备择假设，即两组指标是相同的。</p>
+<p>在统计中，我们会用P值和显著水平α进行比较，又因为α一般取5%，所以就用P值和5%进行比较，就可以得出假设检验的结果了：</p>
+<ul>
+<li>当P值小于5%时，我们拒绝零假设，接受备择假设，得出两组指标是不同的结论，又叫做结果显著。</li>
+<li>当P值大于5%时，我们接受零假设，拒绝备择假设，得出两组指标是相同的结论，又叫做结果不显著。</li>
+</ul>
+<p>置信区间是一个范围，一般前面会跟着一个百分数，最常见的是95%的置信区间。这是什么意思呢？在统计上，对于一个随机变量来说，有95%的概率包含总体平均值（Population mean）的范围，就叫做95%的置信区间。</p>
+<p>置信区间的统计定义其实不是特别好懂，其实你可以直接把它理解为随机变量的波动范围，95%的置信区间就是包含了整个波动范围的95%的区间。</p>
+<p>A/B测试本质上就是要判断对照组和实验组的指标是否相等，那怎么判断呢？答案就是计算实验组和对照组指标的差值δ。因为指标是随机变量，所以它们的差值δ也会是随机变量，具有一定的波动性。</p>
+<p>这就意味着，我们就要计算出δ的置信区间，然后看看这个置信区间是否包括0。如果包括0的话，则说明δ有可能为0，意味着两组指标有可能相同；如果不包括0，则说明两组指标不同。</p>
+<p><img src="https://lianglianglee.com/%e4%b8%93%e6%a0%8f/AB%20%e6%b5%8b%e8%af%95%e4%bb%8e%200%20%e5%88%b0%201/assets/d0cf2481ac93435db2d04577d68b3a83.jpg" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="如何确定ab实验.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 样本量 | AB 测试实战</title>
+  <meta name="description" content="这是一本关于AB测试的书籍" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 样本量 | AB 测试实战" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="这是一本关于AB测试的书籍" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 样本量 | AB 测试实战" />
+  
+  <meta name="twitter:description" content="这是一本关于AB测试的书籍" />
+  
+
+<meta name="author" content="米霖" />
+
+
+<meta name="date" content="2024-11-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="实验单位.html"/>
+<link rel="next" href="什么时候可以开始检验.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">AB测试实战</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> bibliography: [book.bib, packages.bib]</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#ab-测试的重要性"><i class="fa fa-check"></i><b>1.1</b> AB 测试的重要性</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#ab-测试的常见应用"><i class="fa fa-check"></i><b>1.2</b> AB 测试的常见应用</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#ab-测试知识体系"><i class="fa fa-check"></i><b>1.3</b> AB 测试知识体系</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html"><i class="fa fa-check"></i><b>2</b> A B 测试的统计基础</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#正太分布"><i class="fa fa-check"></i><b>2.1</b> 正太分布</a></li>
+<li class="chapter" data-level="2.2" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#二项分布"><i class="fa fa-check"></i><b>2.2</b> 二项分布</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#二项分布的定义"><i class="fa fa-check"></i><b>2.2.1</b> 1. 二项分布的定义</a></li>
+<li class="chapter" data-level="2.2.2" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#二项分布的概率公式"><i class="fa fa-check"></i><b>2.2.2</b> 2. 二项分布的概率公式</a></li>
+<li class="chapter" data-level="2.2.3" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#二项分布的期望值和方差"><i class="fa fa-check"></i><b>2.2.3</b> 3. 二项分布的期望值和方差</a></li>
+<li class="chapter" data-level="2.2.4" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#二项分布的特点"><i class="fa fa-check"></i><b>2.2.4</b> 4. 二项分布的特点</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#beta-分布"><i class="fa fa-check"></i><b>2.3</b> Beta 分布</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#beta-分布的定义"><i class="fa fa-check"></i><b>2.3.1</b> 1. Beta 分布的定义</a></li>
+<li class="chapter" data-level="2.3.2" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#beta-分布的特性"><i class="fa fa-check"></i><b>2.3.2</b> 2. Beta 分布的特性</a></li>
+<li class="chapter" data-level="2.3.3" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#beta-分布在贝叶斯统计中的应用"><i class="fa fa-check"></i><b>2.3.3</b> 3. Beta 分布在贝叶斯统计中的应用</a></li>
+<li class="chapter" data-level="2.3.4" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#beta-分布在-ab-测试中的应用"><i class="fa fa-check"></i><b>2.3.4</b> 4. Beta 分布在 A/B 测试中的应用</a></li>
+<li class="chapter" data-level="2.3.5" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#beta-分布在-ab-测试中的局限性"><i class="fa fa-check"></i><b>2.3.5</b> 5. Beta 分布在 A/B 测试中的局限性</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#中心极限定理"><i class="fa fa-check"></i><b>2.4</b> 中心极限定理</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#均值类指标的正态分布"><i class="fa fa-check"></i><b>2.4.1</b> 1. <strong>均值类指标的正态分布</strong></a></li>
+<li class="chapter" data-level="2.4.2" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#概率类指标如比例的正态近似"><i class="fa fa-check"></i><b>2.4.2</b> 2. <strong>概率类指标（如比例）的正态近似</strong></a></li>
+<li class="chapter" data-level="2.4.3" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#中心极限定理的直观解释"><i class="fa fa-check"></i><b>2.4.3</b> 中心极限定理的直观解释</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#假设检验"><i class="fa fa-check"></i><b>2.5</b> 假设检验</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#假设检验的几个关键概念"><i class="fa fa-check"></i><b>2.5.1</b> 假设检验的几个关键概念</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#用什么检验方法"><i class="fa fa-check"></i><b>2.6</b> 用什么检验方法</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#z检验z-test"><i class="fa fa-check"></i><b>2.6.1</b> 1. Z检验（Z-Test）</a></li>
+<li class="chapter" data-level="2.6.2" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#t检验t-test"><i class="fa fa-check"></i><b>2.6.2</b> 2. T检验（T-Test）</a></li>
+<li class="chapter" data-level="2.6.3" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#t-检验与-z-检验的区别总结"><i class="fa fa-check"></i><b>2.6.3</b> T 检验与 Z 检验的区别总结：</a></li>
+<li class="chapter" data-level="2.6.4" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#总结"><i class="fa fa-check"></i><b>2.6.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#p值和置信区间"><i class="fa fa-check"></i><b>2.7</b> P值和置信区间</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html"><i class="fa fa-check"></i><b>3</b> 如何确定AB实验</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#确定目标和假设"><i class="fa fa-check"></i><b>3.1</b> 确定目标和假设</a></li>
+<li class="chapter" data-level="3.2" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#测试指标"><i class="fa fa-check"></i><b>3.2</b> 测试指标</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#评价指标有哪些"><i class="fa fa-check"></i><b>3.2.1</b> 评价指标有哪些?</a></li>
+<li class="chapter" data-level="3.2.2" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#检验敏感性"><i class="fa fa-check"></i><b>3.2.2</b> 检验敏感性</a></li>
+<li class="chapter" data-level="3.2.3" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#选取具体的评价指标"><i class="fa fa-check"></i><b>3.2.3</b> 选取具体的评价指标</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#oec-overall-evaluation-criteria"><i class="fa fa-check"></i><b>3.3</b> OEC (Overall Evaluation Criteria)</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#指标的波动性"><i class="fa fa-check"></i><b>3.3.1</b> 指标的波动性</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="实验单位.html"><a href="实验单位.html"><i class="fa fa-check"></i><b>4</b> 实验单位</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="实验单位.html"><a href="实验单位.html#实验单位有哪些"><i class="fa fa-check"></i><b>4.1</b> 实验单位有哪些</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="实验单位.html"><a href="实验单位.html#用户层面-user-level"><i class="fa fa-check"></i><b>4.1.1</b> 用户层面 User Level</a></li>
+<li class="chapter" data-level="4.1.2" data-path="实验单位.html"><a href="实验单位.html#访问层面visitsession-level"><i class="fa fa-check"></i><b>4.1.2</b> 访问层面（Visit/Session Level）</a></li>
+<li class="chapter" data-level="4.1.3" data-path="实验单位.html"><a href="实验单位.html#页面层面page-level"><i class="fa fa-check"></i><b>4.1.3</b> 页面层面（Page Level）</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="实验单位.html"><a href="实验单位.html#确定实验单位的三大原则"><i class="fa fa-check"></i><b>4.2</b> 确定实验单位的三大原则</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="实验单位.html"><a href="实验单位.html#保证用户体验的连贯性"><i class="fa fa-check"></i><b>4.2.1</b> 保证用户体验的连贯性</a></li>
+<li class="chapter" data-level="4.2.2" data-path="实验单位.html"><a href="实验单位.html#实验单位要和评价指标的单位保持一致"><i class="fa fa-check"></i><b>4.2.2</b> 实验单位要和评价指标的单位保持一致</a></li>
+<li class="chapter" data-level="4.2.3" data-path="实验单位.html"><a href="实验单位.html#样本数量要尽可能多"><i class="fa fa-check"></i><b>4.2.3</b> 样本数量要尽可能多</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="样本量.html"><a href="样本量.html"><i class="fa fa-check"></i><b>5</b> 样本量</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="样本量.html"><a href="样本量.html#样本量多少为好"><i class="fa fa-check"></i><b>5.1</b> 样本量多少为好</a></li>
+<li class="chapter" data-level="5.2" data-path="样本量.html"><a href="样本量.html#功效分析"><i class="fa fa-check"></i><b>5.2</b> 功效分析</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="样本量.html"><a href="样本量.html#功效分析的作用"><i class="fa fa-check"></i><b>5.2.1</b> 功效分析的作用</a></li>
+<li class="chapter" data-level="5.2.2" data-path="样本量.html"><a href="样本量.html#功效分析的原理"><i class="fa fa-check"></i><b>5.2.2</b> 功效分析的原理</a></li>
+<li class="chapter" data-level="5.2.3" data-path="样本量.html"><a href="样本量.html#功效分析的步骤"><i class="fa fa-check"></i><b>5.2.3</b> 功效分析的步骤</a></li>
+<li class="chapter" data-level="5.2.4" data-path="样本量.html"><a href="样本量.html#功效分析的应用场景"><i class="fa fa-check"></i><b>5.2.4</b> 功效分析的应用场景</a></li>
+<li class="chapter" data-level="5.2.5" data-path="样本量.html"><a href="样本量.html#功效分析的例子"><i class="fa fa-check"></i><b>5.2.5</b> 功效分析的例子</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="样本量.html"><a href="样本量.html#如何理解-power"><i class="fa fa-check"></i><b>5.3</b> 如何理解 power</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="样本量.html"><a href="样本量.html#如何理解功效"><i class="fa fa-check"></i><b>5.3.1</b> 如何理解功效</a></li>
+<li class="chapter" data-level="5.3.2" data-path="样本量.html"><a href="样本量.html#举个例子"><i class="fa fa-check"></i><b>5.3.2</b> 举个例子</a></li>
+<li class="chapter" data-level="5.3.3" data-path="样本量.html"><a href="样本量.html#功效的计算"><i class="fa fa-check"></i><b>5.3.3</b> 功效的计算</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="样本量.html"><a href="样本量.html#显著性水平和power-的关系"><i class="fa fa-check"></i><b>5.4</b> 显著性水平和power 的关系</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="样本量.html"><a href="样本量.html#更清晰的解释"><i class="fa fa-check"></i><b>5.4.1</b> 更清晰的解释</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="样本量.html"><a href="样本量.html#功效分析参数表格"><i class="fa fa-check"></i><b>5.5</b> 功效分析参数表格</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="样本量.html"><a href="样本量.html#独立样本-t-检验independent-samples-t-test"><i class="fa fa-check"></i><b>5.5.1</b> 1. 独立样本 t 检验（Independent Samples T-Test）</a></li>
+<li class="chapter" data-level="5.5.2" data-path="样本量.html"><a href="样本量.html#配对样本-t-检验paired-samples-t-test"><i class="fa fa-check"></i><b>5.5.2</b> 2. 配对样本 t 检验（Paired Samples T-Test）</a></li>
+<li class="chapter" data-level="5.5.3" data-path="样本量.html"><a href="样本量.html#卡方检验chi-square-test"><i class="fa fa-check"></i><b>5.5.3</b> 3. 卡方检验（Chi-Square Test）</a></li>
+<li class="chapter" data-level="5.5.4" data-path="样本量.html"><a href="样本量.html#单因素方差分析one-way-anova"><i class="fa fa-check"></i><b>5.5.4</b> 4. 单因素方差分析（One-Way ANOVA）</a></li>
+<li class="chapter" data-level="5.5.5" data-path="样本量.html"><a href="样本量.html#二项检验binomial-test"><i class="fa fa-check"></i><b>5.5.5</b> 5. 二项检验（Binomial Test）</a></li>
+<li class="chapter" data-level="5.5.6" data-path="样本量.html"><a href="样本量.html#相关性检验correlation-test"><i class="fa fa-check"></i><b>5.5.6</b> 6. 相关性检验（Correlation Test）</a></li>
+<li class="chapter" data-level="5.5.7" data-path="样本量.html"><a href="样本量.html#说明"><i class="fa fa-check"></i><b>5.5.7</b> 说明</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="样本量.html"><a href="样本量.html#实验设置"><i class="fa fa-check"></i><b>5.6</b> 实验设置</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="样本量.html"><a href="样本量.html#简单随机抽样"><i class="fa fa-check"></i><b>5.6.1</b> 简单随机抽样</a></li>
+<li class="chapter" data-level="5.6.2" data-path="样本量.html"><a href="样本量.html#估算实验组和对照组评价指标的差值δ"><i class="fa fa-check"></i><b>5.6.2</b> 估算实验组和对照组评价指标的差值δ</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="什么时候可以开始检验.html"><a href="什么时候可以开始检验.html"><i class="fa fa-check"></i><b>6</b> 什么时候可以开始检验</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="什么时候可以开始检验.html"><a href="什么时候可以开始检验.html#保障统计品质的合理性检验"><i class="fa fa-check"></i><b>6.1</b> 保障统计品质的合理性检验</a></li>
+<li class="chapter" data-level="6.2" data-path="什么时候可以开始检验.html"><a href="什么时候可以开始检验.html#分析结果"><i class="fa fa-check"></i><b>6.2</b> 分析结果</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html"><i class="fa fa-check"></i><b>7</b> 如何搭建规范的AB测试框架</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#从业务问题出发确定ab测试的目标和假设"><i class="fa fa-check"></i><b>7.1</b> 从业务问题出发，确定A/B测试的目标和假设</a></li>
+<li class="chapter" data-level="7.2" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#确定ab测试的评价指标"><i class="fa fa-check"></i><b>7.2</b> 确定A/B测试的评价指标</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#第一个问题如何定义实验中的用户"><i class="fa fa-check"></i><b>7.2.1</b> 第一个问题，如何定义“实验中的用户”？</a></li>
+<li class="chapter" data-level="7.2.2" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#第二个问题如何确定用户从触发弹窗开始到最终使用功能的时间窗口期呢"><i class="fa fa-check"></i><b>7.2.2</b> 第二个问题，如何确定用户从触发弹窗开始到最终使用功能的时间窗口期呢？</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#选取实验对象的单位"><i class="fa fa-check"></i><b>7.3</b> 选取实验对象的单位</a></li>
+<li class="chapter" data-level="7.4" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#计算所需的样本大小和实验所需时间"><i class="fa fa-check"></i><b>7.4</b> 计算所需的样本大小和实验所需时间</a></li>
+<li class="chapter" data-level="7.5" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#分析测试结果"><i class="fa fa-check"></i><b>7.5</b> 分析测试结果</a></li>
+<li class="chapter" data-level="7.6" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#总结-1"><i class="fa fa-check"></i><b>7.6</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html"><i class="fa fa-check"></i><b>8</b> 如果结果不显著怎么办</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#为什么会出现实验结果不显著"><i class="fa fa-check"></i><b>8.1</b> 为什么会出现“实验结果不显著”？</a></li>
+<li class="chapter" data-level="8.2" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#如何通过增加样本量来提高power"><i class="fa fa-check"></i><b>8.2</b> 如何通过增加样本量来提高Power？</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#延长测试时间"><i class="fa fa-check"></i><b>8.2.1</b> 延长测试时间</a></li>
+<li class="chapter" data-level="8.2.2" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#增加测试使用流量在总流量中的占比"><i class="fa fa-check"></i><b>8.2.2</b> 增加测试使用流量在总流量中的占比</a></li>
+<li class="chapter" data-level="8.2.3" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#多个测试共用同一个对照组"><i class="fa fa-check"></i><b>8.2.3</b> 多个测试共用同一个对照组</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#如何通过减小方差来提高power"><i class="fa fa-check"></i><b>8.3</b> 如何通过减小方差来提高Power？</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#减小指标的方差"><i class="fa fa-check"></i><b>8.3.1</b> 减小指标的方差</a></li>
+<li class="chapter" data-level="8.3.2" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#第二种方式选用方差较小的指标"><i class="fa fa-check"></i><b>8.3.2</b> 第二种方式：选用方差较小的指标。</a></li>
+<li class="chapter" data-level="8.3.3" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#倾向评分匹配propensity-score-matching"><i class="fa fa-check"></i><b>8.3.3</b> 倾向评分匹配（Propensity Score Matching）</a></li>
+<li class="chapter" data-level="8.3.4" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#在触发阶段计算指标"><i class="fa fa-check"></i><b>8.3.4</b> 在触发阶段计算指标</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#小结"><i class="fa fa-check"></i><b>8.4</b> 小结</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="常见问题.html"><a href="常见问题.html"><i class="fa fa-check"></i><b>9</b> 常见问题</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="常见问题.html"><a href="常见问题.html#多重检验问题multiple-testing-problem"><i class="fa fa-check"></i><b>9.1</b> 多重检验问题（Multiple Testing Problem）</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="常见问题.html"><a href="常见问题.html#多重检验为什么会是一个问题"><i class="fa fa-check"></i><b>9.1.1</b> 多重检验为什么会是一个问题？</a></li>
+<li class="chapter" data-level="9.1.2" data-path="常见问题.html"><a href="常见问题.html#什么时候会遇到多重检验问题"><i class="fa fa-check"></i><b>9.1.2</b> 什么时候会遇到多重检验问题？</a></li>
+<li class="chapter" data-level="9.1.3" data-path="常见问题.html"><a href="常见问题.html#如何解决多重检验问题"><i class="fa fa-check"></i><b>9.1.3</b> 如何解决多重检验问题？</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="常见问题.html"><a href="常见问题.html#学习效应learning-effect"><i class="fa fa-check"></i><b>9.2</b> 学习效应(Learning Effect)</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="常见问题.html"><a href="常见问题.html#学习效应在实践中有哪些表现形式"><i class="fa fa-check"></i><b>9.2.1</b> 学习效应在实践中有哪些表现形式？</a></li>
+<li class="chapter" data-level="9.2.2" data-path="常见问题.html"><a href="常见问题.html#学习效应该如何检测"><i class="fa fa-check"></i><b>9.2.2</b> 学习效应该如何检测？</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="常见问题.html"><a href="常见问题.html#辛普森悖论"><i class="fa fa-check"></i><b>9.3</b> 辛普森悖论</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="常见问题.html"><a href="常见问题.html#数学描述"><i class="fa fa-check"></i><b>9.3.1</b> 数学描述</a></li>
+<li class="chapter" data-level="9.3.2" data-path="常见问题.html"><a href="常见问题.html#示例"><i class="fa fa-check"></i><b>9.3.2</b> 示例</a></li>
+<li class="chapter" data-level="9.3.3" data-path="常见问题.html"><a href="常见问题.html#辛普森悖论的关键原因"><i class="fa fa-check"></i><b>9.3.3</b> 辛普森悖论的关键原因</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="常见问题.html"><a href="常见问题.html#实验组和对照组要相互独立"><i class="fa fa-check"></i><b>9.4</b> 实验组和对照组要相互独立</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="常见问题.html"><a href="常见问题.html#破坏两组独立性的表现形式有哪些"><i class="fa fa-check"></i><b>9.4.1</b> 破坏两组独立性的表现形式有哪些？</a></li>
+<li class="chapter" data-level="9.4.2" data-path="常见问题.html"><a href="常见问题.html#如何避免破坏两组的独立性"><i class="fa fa-check"></i><b>9.4.2</b> 如何避免破坏两组的独立性？</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html"><i class="fa fa-check"></i><b>10</b> 什么时候不适合AB测试</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#当没有办法控制想要测试的变量时"><i class="fa fa-check"></i><b>10.1</b> 当没有办法控制想要测试的变量时</a></li>
+<li class="chapter" data-level="10.2" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#当有重大事件发布时"><i class="fa fa-check"></i><b>10.2</b> 当有重大事件发布时</a></li>
+<li class="chapter" data-level="10.3" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#用户量很少的时候"><i class="fa fa-check"></i><b>10.3</b> 用户量很少的时候</a></li>
+<li class="chapter" data-level="10.4" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#ab-测试替代方法"><i class="fa fa-check"></i><b>10.4</b> AB 测试替代方法</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#因果推断"><i class="fa fa-check"></i><b>10.4.1</b> 因果推断</a></li>
+<li class="chapter" data-level="10.4.2" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#用户研究"><i class="fa fa-check"></i><b>10.4.2</b> 用户研究</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#知识点总结"><i class="fa fa-check"></i><b>10.5</b> 知识点总结</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="构建一个shiny-的样本计算器.html"><a href="构建一个shiny-的样本计算器.html"><i class="fa fa-check"></i><b>11</b> 构建一个Shiny 的样本计算器</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/liamamilin" target="blank">AB测试实战</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">AB 测试实战</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="样本量" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> 样本量<a href="样本量.html#样本量" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="样本量多少为好" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> 样本量多少为好<a href="样本量.html#样本量多少为好" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>如果我问你，做A/B测试时多少样本量合适，你的第一反应肯定是，那当然是越多越好啊。样本量越多，实验结果才会越准确嘛！</p>
+<p>从统计理论上来说，确实是这样。因为样本量越大，样本所具有的代表性才越强。但在实际业务中，样本量其实是越少越好。</p>
+<p>为什么会这样说呢？我来带你分析一下。</p>
+<p>要弄明白这个问题，你首先要知道A/B需要做多长时间，我给你一个公式：A/B测试所需的时间 = 总样本量 / 每天可以得到的样本量。</p>
+<p>你看，从公式就能看出来，样本量越小，意味着实验所进行的时间越短。在实际业务场景中，时间往往是最宝贵的资源，毕竟，快速迭代贵在一个“快”字。</p>
+<p>另外，我们做A/B测试的目的，就是为了验证某种改变是否可以提升产品、业务，当然也可能出现某种改变会对产品、业务造成损害的情况，所以这就有一定的试错成本。那么，实验范围越小，样本量越小，试错成本就会越低。</p>
+<p>你看，实践和理论上对样本量的需求，其实是一对矛盾。所以，我们就要在统计理论和实际业务场景这两者中间做一个平衡：在A/B测试中，既要保证样本量足够大，又要把实验控制在尽可能短的时间内。</p>
+<p>那么，样本量到底该怎么确定呢？ 这就设计到另外一个统计学中的理论了: 功效分析.</p>
+</div>
+<div id="功效分析" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> 功效分析<a href="样本量.html#功效分析" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>功效分析</strong>（Power Analysis）是一种统计方法，用于确定在进行假设检验时，样本量是否足够大，能够以足够高的概率（即“统计功效”）去检测出<strong>真实效应</strong>，如果它确实存在的话。</p>
+<div id="功效分析的作用" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> 功效分析的作用<a href="样本量.html#功效分析的作用" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>功效分析主要用于以下目的：</p>
+<ol style="list-style-type: decimal">
+<li><strong>确定所需样本量</strong>：在设计实验或研究时，功效分析可以帮助确定所需的样本量，以确保检验结果具有足够的统计功效。</li>
+<li><strong>避免浪费资源</strong>：功效分析可以避免样本量过大或过小的问题。样本量过大可能浪费资源，而样本量不足会导致无法得出有意义的结论。</li>
+<li><strong>确保结果的可靠性</strong>：通过功效分析，可以提高实验结果的可信度，减少出现<strong>第一类错误</strong>（假阳性）和<strong>第二类错误</strong>（假阴性）的风险。</li>
+</ol>
+</div>
+<div id="功效分析的原理" class="section level3 hasAnchor" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> 功效分析的原理<a href="样本量.html#功效分析的原理" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>功效分析涉及四个关键要素：</p>
+<ol style="list-style-type: decimal">
+<li><strong>效应量</strong>（Effect Size）：效应量描述了两个组之间的差异大小。例如，在 A/B 测试中，效应量可能是两个版本的点击率差异。效应量越大，越容易检测到差异。</li>
+<li><strong>样本量</strong>（Sample Size）：样本量越大，检测效应的能力（功效）就越高。</li>
+<li><strong>显著性水平（α）</strong>（Significance Level）：通常设定为 0.05 或 0.01，表示我们愿意接受的第一类错误率的概率。</li>
+<li><strong>统计功效（1-β）</strong>（Statistical Power）：功效通常设为 0.8 或 0.9，表示我们期望有 80% 或 90% 的概率去发现一个真实效应。功效越高，研究的检测能力就越强。</li>
+</ol>
+<p><strong>功效</strong>的定义为在效应真实存在的前提下，正确拒绝原假设的概率。它反映了实验能否有效地发现实际存在的差异或关系。</p>
+</div>
+<div id="功效分析的步骤" class="section level3 hasAnchor" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> 功效分析的步骤<a href="样本量.html#功效分析的步骤" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>确定研究的目标</strong>：明确假设检验的类型（如 t 检验、卡方检验、相关性检验等）和研究目标（例如两个均值的比较）。</li>
+<li><strong>估计效应量</strong>：根据过去的研究、文献或专家判断，估算预期效应量。效应量通常用 Cohen’s d、Pearson’s r 或 OR 等指标表示。</li>
+<li><strong>选择显著性水平</strong>：通常选择 0.05 或 0.01 作为显著性水平，表示可接受的第一类错误率。</li>
+<li><strong>设定功效水平</strong>：一般设定功效水平为 0.8 或 0.9，表示有 80% 或 90% 的把握发现真实效应。</li>
+<li><strong>计算所需样本量</strong>：使用功效分析软件（如 G*Power）或统计公式，计算所需样本量。</li>
+</ol>
+</div>
+<div id="功效分析的应用场景" class="section level3 hasAnchor" number="5.2.4">
+<h3><span class="header-section-number">5.2.4</span> 功效分析的应用场景<a href="样本量.html#功效分析的应用场景" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>实验设计前</strong>：功效分析可以帮助设计者确定所需样本量，避免因样本不足而导致实验无效。</li>
+<li><strong>检验结果的可信度</strong>：在实验结束后，可以进行功效分析，评估该实验的检测能力，判断结果的可信度。</li>
+<li><strong>A/B 测试</strong>：在用户体验和市场营销中，通过功效分析确定 A/B 测试的样本量，确保测试的效果显著。</li>
+</ol>
+</div>
+<div id="功效分析的例子" class="section level3 hasAnchor" number="5.2.5">
+<h3><span class="header-section-number">5.2.5</span> 功效分析的例子<a href="样本量.html#功效分析的例子" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>假设我们要在 A/B 测试中比较两个版本的转化率差异：</p>
+<ul>
+<li>我们假设 A 版本的转化率为 5%，希望测试 B 版本是否能提高转化率至 6%。</li>
+<li><strong>效应量</strong>可以计算为 5% 和 6% 的差值，通常用 Cohen’s h 或其他效应量指标表示。</li>
+<li>设定显著性水平（α）为 0.05，功效（1-β）为 0.8。</li>
+</ul>
+<p>通过功效分析，我们可以计算出在该显著性水平和功效要求下所需的样本量，确保能够有效检测 5% 和 6% 之间的差异。如果样本量不足，则可以考虑延长测试时间或增大样本量，以满足功效要求。</p>
+</div>
+</div>
+<div id="如何理解-power" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> 如何理解 power<a href="样本量.html#如何理解-power" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>在统计学中，<strong>功效（Power）</strong>是衡量一个假设检验的检测能力的指标，具体来说，它表示<strong>在备择假设为真时，正确拒绝原假设的概率</strong>。功效越高，检验的灵敏度越好，意味着我们更有可能检测到实际存在的效应或差异。</p>
+<div id="如何理解功效" class="section level3 hasAnchor" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> 如何理解功效<a href="样本量.html#如何理解功效" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>可以通过以下几个方面来理解功效：</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>功效与“真阳性”的关系</strong>：功效指的是在效应真实存在的情况下，检测出该效应的概率。也就是说，功效是指我们在面对真实差异时，能多大概率“捕捉”到它。功效越高，意味着我们越可能找到真实的效果，避免“漏判”。</p></li>
+<li><p><strong>功效与假设检验的“四个要素”</strong>：功效与<strong>效应量（Effect Size）</strong>、<strong>显著性水平（α）</strong>、<strong>样本量（n）</strong>和<strong>数据的变异性</strong>有直接关系。通过控制这些要素，可以提高或降低功效。</p>
+<ul>
+<li><strong>效应量</strong>越大，功效越高，因为大的差异更容易检测到。</li>
+<li><strong>样本量</strong>越大，功效越高，因为大的样本量能减少估计误差，更容易识别真实差异。</li>
+<li>较低的<strong>显著性水平</strong>会降低功效，因为我们需要更强的证据去拒绝原假设。</li>
+<li><strong>数据的变异性</strong>越小，功效越高，因为数据更集中，差异更明显。</li>
+</ul></li>
+<li><p><strong>功效与错误概率的关系</strong>：功效与<strong>第二类错误（β）</strong>有密切关系。第二类错误是指在备择假设为真时错误地接受了原假设，功效（1-β）则是避免这种错误的概率。例如，功效为 0.8 意味着我们有 80% 的概率正确拒绝原假设，即我们有 80% 的概率发现实际存在的效应。</p></li>
+<li><p><strong>功效在研究设计中的作用</strong>：在设计实验或统计检验时，功效分析可以帮助我们确定合适的样本量。功效不足的测试可能会“漏掉”真实差异，而功效过高的测试则可能导致资源浪费。因此，通过功效分析，我们可以设计一个有效的实验，使其有足够的能力发现真实的差异或效应。</p></li>
+</ol>
+</div>
+<div id="举个例子" class="section level3 hasAnchor" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> 举个例子<a href="样本量.html#举个例子" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>假设我们进行一个 A/B 测试，希望比较两个版本的点击率是否有显著差异：</p>
+<ul>
+<li>原假设：两个版本的点击率相等。</li>
+<li>备择假设：两个版本的点击率不同。</li>
+</ul>
+<p>在备择假设为真的情况下（例如 B 版本的点击率确实高于 A 版本），功效就是我们能够检测到这种差异的概率。假设功效为 0.8，这意味着在点击率差异真实存在时，我们有 80% 的概率能够通过检验“发现”这种差异并拒绝原假设。这一功效水平保证了我们在设计实验时不会“错过”有意义的结果。</p>
+</div>
+<div id="功效的计算" class="section level3 hasAnchor" number="5.3.3">
+<h3><span class="header-section-number">5.3.3</span> 功效的计算<a href="样本量.html#功效的计算" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>功效可以通过功效分析计算，功效分析通常需要以下参数：</p>
+<ol style="list-style-type: decimal">
+<li><strong>显著性水平（α）</strong>：通常设定为 0.05 或 0.01，表示可接受的第一类错误概率。</li>
+<li><strong>效应量</strong>：描述两组之间的差异大小，例如 Cohen’s d、Pearson’s r 等。</li>
+<li><strong>样本量</strong>：样本数量越多，功效越高。</li>
+<li><strong>功效水平</strong>：通常设为 0.8 或 0.9，表示期望的正确检验概率。</li>
+</ol>
+<p>可以通过功效分析软件（如 G*Power）或手动计算来确定功效或所需的样本量。</p>
+</div>
+</div>
+<div id="显著性水平和power-的关系" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> 显著性水平和power 的关系<a href="样本量.html#显著性水平和power-的关系" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p><strong>显著性水平（α）</strong>：通常设定为 0.05 或 0.01，是我们在假设检验中接受的<strong>假阳性概率</strong>（Type I Error）。也就是说，当原假设为真时，我们仍有 α 的概率会错误地拒绝原假设，即判断“有显著差异”时犯的错误。</p></li>
+<li><p><strong>功效（1 - β）</strong>：功效是<strong>真阳性概率</strong>，即在备择假设为真的情况下，正确拒绝原假设的概率。它表示我们能够检测到实际存在的效应的能力。功效越高，我们就越有把握检测出真实存在的差异或效应，通常设定功效为 0.8 或 0.9（即 80% 或 90% 的概率）。</p></li>
+</ul>
+<div id="更清晰的解释" class="section level3 hasAnchor" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> 更清晰的解释<a href="样本量.html#更清晰的解释" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>假设检验中存在两种主要错误：</p>
+<ol style="list-style-type: decimal">
+<li><strong>第一类错误（Type I Error）</strong>：
+<ul>
+<li><strong>定义</strong>：当原假设为真时，错误地拒绝了原假设。</li>
+<li><strong>概率</strong>：显著性水平（α）表示接受这种错误的概率，即“假阳性”的概率。</li>
+</ul></li>
+<li><strong>第二类错误（Type II Error）</strong>：
+<ul>
+<li><strong>定义</strong>：当备择假设为真时，错误地接受了原假设。</li>
+<li><strong>概率</strong>：β 表示发生这种错误的概率。</li>
+<li><strong>功效（Power）</strong>：功效是 1 - β，即“真阳性”的概率，表示在真实差异存在时，我们检测到这个差异的概率。</li>
+</ul></li>
+</ol>
+<p>是的，<strong>显著性水平（α）</strong>和<strong>功效（Power）</strong>之间确实存在一种权衡关系：<strong>当其他条件（样本量、效应量）不变时，降低显著性水平会导致功效降低</strong>，而提高功效则通常需要提高显著性水平。</p>
+<p>当我们降低显著性水平时，相当于收紧了<strong>拒绝原假设的条件</strong>，即我们要求更强的证据才能认为差异显著。这就提高了我们发现“假阳性”的难度，同时也可能会漏掉真实的效应，从而降低功效（即真阳性概率）。</p>
+<p>假设我们进行一个 A/B 测试，原假设是两个版本的点击率相等。若显著性水平从 0.05 降到 0.01，那么我们只有在 p 值小于 0.01 时才会拒绝原假设。这就意味着需要更大的样本量或更强的效应量来达到这个要求，否则我们可能会错失检测到的真实效应。</p>
+<p>提高功效意味着我们希望在真实效应存在时更有可能检测到它。为了实现更高的功效，在样本量和效应量不变的情况下，我们可以<strong>放宽显著性水平</strong>（例如从 0.01 提高到 0.05），这样会更容易拒绝原假设，从而更容易发现真阳性。</p>
+<p>在功效分析中，这四个要素是相互关联的，通常我们可以通过增加样本量来解决这个矛盾。具体来说：</p>
+<ul>
+<li><strong>如果降低显著性水平（α）并保持功效（Power）不变</strong>，那么我们需要增大样本量，以获得足够的统计能力去检测真实的效应。</li>
+<li><strong>如果样本量和效应量固定不变</strong>，则显著性水平和功效之间确实存在权衡关系，难以同时降低显著性水平和增大功效。</li>
+</ul>
+<p>在实际研究中，研究者通常根据以下策略进行折中：
+- <strong>设定合理的显著性水平</strong>：通常为 0.05，但在某些要求严格的科学领域，会设定为 0.01 或更小。
+- <strong>设定目标功效</strong>：通常设为 0.8（80%）或 0.9（90%）。
+- <strong>调整样本量</strong>：如果显著性水平降低且需要保持功效，则增加样本量是最常用的策略。</p>
+</div>
+</div>
+<div id="功效分析参数表格" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> 功效分析参数表格<a href="样本量.html#功效分析参数表格" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="独立样本-t-检验independent-samples-t-test" class="section level3 hasAnchor" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> 1. 独立样本 t 检验（Independent Samples T-Test）<a href="样本量.html#独立样本-t-检验independent-samples-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>用于比较两个独立组的均值。</p>
+<table>
+<thead>
+<tr class="header">
+<th>显著性水平 (α)</th>
+<th>功效 (1-β)</th>
+<th>效应量 (Cohen’s d)</th>
+<th>单组样本量</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.05</td>
+<td>0.8</td>
+<td>小效应 (0.2)</td>
+<td>~394</td>
+</tr>
+<tr class="even">
+<td>0.05</td>
+<td>0.8</td>
+<td>中效应 (0.5)</td>
+<td>~64</td>
+</tr>
+<tr class="odd">
+<td>0.05</td>
+<td>0.8</td>
+<td>大效应 (0.8)</td>
+<td>~26</td>
+</tr>
+<tr class="even">
+<td>0.01</td>
+<td>0.9</td>
+<td>小效应 (0.2)</td>
+<td>~1054</td>
+</tr>
+<tr class="odd">
+<td>0.01</td>
+<td>0.9</td>
+<td>中效应 (0.5)</td>
+<td>~140</td>
+</tr>
+<tr class="even">
+<td>0.01</td>
+<td>0.9</td>
+<td>大效应 (0.8)</td>
+<td>~54</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="配对样本-t-检验paired-samples-t-test" class="section level3 hasAnchor" number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> 2. 配对样本 t 检验（Paired Samples T-Test）<a href="样本量.html#配对样本-t-检验paired-samples-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>用于成对数据或重复测量设计（如前后测试）。</p>
+<table>
+<thead>
+<tr class="header">
+<th>显著性水平 (α)</th>
+<th>功效 (1-β)</th>
+<th>效应量 (Cohen’s d)</th>
+<th>样本量</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.05</td>
+<td>0.8</td>
+<td>小效应 (0.2)</td>
+<td>~199</td>
+</tr>
+<tr class="even">
+<td>0.05</td>
+<td>0.8</td>
+<td>中效应 (0.5)</td>
+<td>~34</td>
+</tr>
+<tr class="odd">
+<td>0.05</td>
+<td>0.8</td>
+<td>大效应 (0.8)</td>
+<td>~15</td>
+</tr>
+<tr class="even">
+<td>0.01</td>
+<td>0.9</td>
+<td>小效应 (0.2)</td>
+<td>~526</td>
+</tr>
+<tr class="odd">
+<td>0.01</td>
+<td>0.9</td>
+<td>中效应 (0.5)</td>
+<td>~60</td>
+</tr>
+<tr class="even">
+<td>0.01</td>
+<td>0.9</td>
+<td>大效应 (0.8)</td>
+<td>~24</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="卡方检验chi-square-test" class="section level3 hasAnchor" number="5.5.3">
+<h3><span class="header-section-number">5.5.3</span> 3. 卡方检验（Chi-Square Test）<a href="样本量.html#卡方检验chi-square-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>用于分类变量的检验（如频率分布的差异）。</p>
+<table>
+<thead>
+<tr class="header">
+<th>显著性水平 (α)</th>
+<th>功效 (1-β)</th>
+<th>效应量（w）</th>
+<th>样本量</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.05</td>
+<td>0.8</td>
+<td>小效应 (0.1)</td>
+<td>~877</td>
+</tr>
+<tr class="even">
+<td>0.05</td>
+<td>0.8</td>
+<td>中效应 (0.3)</td>
+<td>~88</td>
+</tr>
+<tr class="odd">
+<td>0.05</td>
+<td>0.8</td>
+<td>大效应 (0.5)</td>
+<td>~28</td>
+</tr>
+<tr class="even">
+<td>0.01</td>
+<td>0.9</td>
+<td>小效应 (0.1)</td>
+<td>~1161</td>
+</tr>
+<tr class="odd">
+<td>0.01</td>
+<td>0.9</td>
+<td>中效应 (0.3)</td>
+<td>~116</td>
+</tr>
+<tr class="even">
+<td>0.01</td>
+<td>0.9</td>
+<td>大效应 (0.5)</td>
+<td>~38</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="单因素方差分析one-way-anova" class="section level3 hasAnchor" number="5.5.4">
+<h3><span class="header-section-number">5.5.4</span> 4. 单因素方差分析（One-Way ANOVA）<a href="样本量.html#单因素方差分析one-way-anova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>用于比较三个或以上组的均值差异。</p>
+<table>
+<thead>
+<tr class="header">
+<th>显著性水平 (α)</th>
+<th>功效 (1-β)</th>
+<th>效应量（f）</th>
+<th>每组样本量</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.05</td>
+<td>0.8</td>
+<td>小效应 (0.1)</td>
+<td>~525</td>
+</tr>
+<tr class="even">
+<td>0.05</td>
+<td>0.8</td>
+<td>中效应 (0.25)</td>
+<td>~34</td>
+</tr>
+<tr class="odd">
+<td>0.05</td>
+<td>0.8</td>
+<td>大效应 (0.4)</td>
+<td>~16</td>
+</tr>
+<tr class="even">
+<td>0.01</td>
+<td>0.9</td>
+<td>小效应 (0.1)</td>
+<td>~689</td>
+</tr>
+<tr class="odd">
+<td>0.01</td>
+<td>0.9</td>
+<td>中效应 (0.25)</td>
+<td>~46</td>
+</tr>
+<tr class="even">
+<td>0.01</td>
+<td>0.9</td>
+<td>大效应 (0.4)</td>
+<td>~21</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="二项检验binomial-test" class="section level3 hasAnchor" number="5.5.5">
+<h3><span class="header-section-number">5.5.5</span> 5. 二项检验（Binomial Test）<a href="样本量.html#二项检验binomial-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>用于分析比例数据（如成败或阳性阴性结果）。</p>
+<table>
+<thead>
+<tr class="header">
+<th>显著性水平 (α)</th>
+<th>功效 (1-β)</th>
+<th>效应量（p1-p2）</th>
+<th>样本量（每组）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.05</td>
+<td>0.8</td>
+<td>小效应 (0.1)</td>
+<td>~784</td>
+</tr>
+<tr class="even">
+<td>0.05</td>
+<td>0.8</td>
+<td>中效应 (0.3)</td>
+<td>~88</td>
+</tr>
+<tr class="odd">
+<td>0.05</td>
+<td>0.8</td>
+<td>大效应 (0.5)</td>
+<td>~28</td>
+</tr>
+<tr class="even">
+<td>0.01</td>
+<td>0.9</td>
+<td>小效应 (0.1)</td>
+<td>~1054</td>
+</tr>
+<tr class="odd">
+<td>0.01</td>
+<td>0.9</td>
+<td>中效应 (0.3)</td>
+<td>~116</td>
+</tr>
+<tr class="even">
+<td>0.01</td>
+<td>0.9</td>
+<td>大效应 (0.5)</td>
+<td>~38</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="相关性检验correlation-test" class="section level3 hasAnchor" number="5.5.6">
+<h3><span class="header-section-number">5.5.6</span> 6. 相关性检验（Correlation Test）<a href="样本量.html#相关性检验correlation-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>用于检测两个变量之间的相关性。</p>
+<table>
+<thead>
+<tr class="header">
+<th>显著性水平 (α)</th>
+<th>功效 (1-β)</th>
+<th>效应量（r）</th>
+<th>样本量</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.05</td>
+<td>0.8</td>
+<td>小效应 (0.1)</td>
+<td>~782</td>
+</tr>
+<tr class="even">
+<td>0.05</td>
+<td>0.8</td>
+<td>中效应 (0.3)</td>
+<td>~85</td>
+</tr>
+<tr class="odd">
+<td>0.05</td>
+<td>0.8</td>
+<td>大效应 (0.5)</td>
+<td>~28</td>
+</tr>
+<tr class="even">
+<td>0.01</td>
+<td>0.9</td>
+<td>小效应 (0.1)</td>
+<td>~1050</td>
+</tr>
+<tr class="odd">
+<td>0.01</td>
+<td>0.9</td>
+<td>中效应 (0.3)</td>
+<td>~115</td>
+</tr>
+<tr class="even">
+<td>0.01</td>
+<td>0.9</td>
+<td>大效应 (0.5)</td>
+<td>~38</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="说明" class="section level3 hasAnchor" number="5.5.7">
+<h3><span class="header-section-number">5.5.7</span> 说明<a href="样本量.html#说明" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p><strong>效应量解释</strong>：</p>
+<ul>
+<li><strong>小效应</strong>：难以检测，需要大样本量。</li>
+<li><strong>中效应</strong>：常见效果，样本量要求适中。</li>
+<li><strong>大效应</strong>：容易检测，样本量要求较小。</li>
+</ul></li>
+<li><p><strong>显著性水平 (α)</strong>：通常设为 0.05 或 0.01，α 越小，对显著性的要求越严格，样本量需求也更大。</p></li>
+<li><p><strong>功效水平 (1-β)</strong>：常设为 0.8 或 0.9，功效越高，越能有效检测到真实差异，也需要更多样本量。</p></li>
+</ul>
+<p><img src="https://lianglianglee.com/%e4%b8%93%e6%a0%8f/AB%20%e6%b5%8b%e8%af%95%e4%bb%8e%200%20%e5%88%b0%201/assets/fbb6859477f94b43b84e485f8eb88393.jpg" /></p>
+</div>
+</div>
+<div id="实验设置" class="section level2 hasAnchor" number="5.6">
+<h2><span class="header-section-number">5.6</span> 实验设置<a href="样本量.html#实验设置" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="简单随机抽样" class="section level3 hasAnchor" number="5.6.1">
+<h3><span class="header-section-number">5.6.1</span> 简单随机抽样<a href="样本量.html#简单随机抽样" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>如果A/B测试的实验组和对照组样本量相等，即为50%/50%均分,在非均分的情况下，只有相对较小组的样本量达到最小样本量，实验结果才有可能显著，并不是说实验组越大越好，因为瓶颈是在样本量较小的对照组上。
+所以只有两组均分，才能使两组的样本量均达到最大，并且使总样本量发挥最大使用效率，从而保证A/B测试更快更准确地进行。</p>
+</div>
+<div id="估算实验组和对照组评价指标的差值δ" class="section level3 hasAnchor" number="5.6.2">
+<h3><span class="header-section-number">5.6.2</span> 估算实验组和对照组评价指标的差值δ<a href="样本量.html#估算实验组和对照组评价指标的差值δ" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>专家建议</li>
+<li>方法是从收益和成本的角度进行估算。</li>
+<li>从历史数据中估算, 例如现在是 5% , 那么目标是 提升2% 是合理的.</li>
+</ol>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="实验单位.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="什么时候可以开始检验.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-citations.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

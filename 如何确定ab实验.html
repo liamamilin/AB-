@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 如何确定AB实验 | AB 测试实战</title>
+  <meta name="description" content="这是一本关于AB测试的书籍" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 如何确定AB实验 | AB 测试实战" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="这是一本关于AB测试的书籍" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 如何确定AB实验 | AB 测试实战" />
+  
+  <meta name="twitter:description" content="这是一本关于AB测试的书籍" />
+  
+
+<meta name="author" content="米霖" />
+
+
+<meta name="date" content="2024-11-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="a-b-测试的统计基础.html"/>
+<link rel="next" href="实验单位.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">AB测试实战</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> bibliography: [book.bib, packages.bib]</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#ab-测试的重要性"><i class="fa fa-check"></i><b>1.1</b> AB 测试的重要性</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#ab-测试的常见应用"><i class="fa fa-check"></i><b>1.2</b> AB 测试的常见应用</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#ab-测试知识体系"><i class="fa fa-check"></i><b>1.3</b> AB 测试知识体系</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html"><i class="fa fa-check"></i><b>2</b> A B 测试的统计基础</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#正太分布"><i class="fa fa-check"></i><b>2.1</b> 正太分布</a></li>
+<li class="chapter" data-level="2.2" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#二项分布"><i class="fa fa-check"></i><b>2.2</b> 二项分布</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#二项分布的定义"><i class="fa fa-check"></i><b>2.2.1</b> 1. 二项分布的定义</a></li>
+<li class="chapter" data-level="2.2.2" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#二项分布的概率公式"><i class="fa fa-check"></i><b>2.2.2</b> 2. 二项分布的概率公式</a></li>
+<li class="chapter" data-level="2.2.3" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#二项分布的期望值和方差"><i class="fa fa-check"></i><b>2.2.3</b> 3. 二项分布的期望值和方差</a></li>
+<li class="chapter" data-level="2.2.4" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#二项分布的特点"><i class="fa fa-check"></i><b>2.2.4</b> 4. 二项分布的特点</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#beta-分布"><i class="fa fa-check"></i><b>2.3</b> Beta 分布</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#beta-分布的定义"><i class="fa fa-check"></i><b>2.3.1</b> 1. Beta 分布的定义</a></li>
+<li class="chapter" data-level="2.3.2" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#beta-分布的特性"><i class="fa fa-check"></i><b>2.3.2</b> 2. Beta 分布的特性</a></li>
+<li class="chapter" data-level="2.3.3" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#beta-分布在贝叶斯统计中的应用"><i class="fa fa-check"></i><b>2.3.3</b> 3. Beta 分布在贝叶斯统计中的应用</a></li>
+<li class="chapter" data-level="2.3.4" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#beta-分布在-ab-测试中的应用"><i class="fa fa-check"></i><b>2.3.4</b> 4. Beta 分布在 A/B 测试中的应用</a></li>
+<li class="chapter" data-level="2.3.5" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#beta-分布在-ab-测试中的局限性"><i class="fa fa-check"></i><b>2.3.5</b> 5. Beta 分布在 A/B 测试中的局限性</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#中心极限定理"><i class="fa fa-check"></i><b>2.4</b> 中心极限定理</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#均值类指标的正态分布"><i class="fa fa-check"></i><b>2.4.1</b> 1. <strong>均值类指标的正态分布</strong></a></li>
+<li class="chapter" data-level="2.4.2" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#概率类指标如比例的正态近似"><i class="fa fa-check"></i><b>2.4.2</b> 2. <strong>概率类指标（如比例）的正态近似</strong></a></li>
+<li class="chapter" data-level="2.4.3" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#中心极限定理的直观解释"><i class="fa fa-check"></i><b>2.4.3</b> 中心极限定理的直观解释</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#假设检验"><i class="fa fa-check"></i><b>2.5</b> 假设检验</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#假设检验的几个关键概念"><i class="fa fa-check"></i><b>2.5.1</b> 假设检验的几个关键概念</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#用什么检验方法"><i class="fa fa-check"></i><b>2.6</b> 用什么检验方法</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#z检验z-test"><i class="fa fa-check"></i><b>2.6.1</b> 1. Z检验（Z-Test）</a></li>
+<li class="chapter" data-level="2.6.2" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#t检验t-test"><i class="fa fa-check"></i><b>2.6.2</b> 2. T检验（T-Test）</a></li>
+<li class="chapter" data-level="2.6.3" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#t-检验与-z-检验的区别总结"><i class="fa fa-check"></i><b>2.6.3</b> T 检验与 Z 检验的区别总结：</a></li>
+<li class="chapter" data-level="2.6.4" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#总结"><i class="fa fa-check"></i><b>2.6.4</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="a-b-测试的统计基础.html"><a href="a-b-测试的统计基础.html#p值和置信区间"><i class="fa fa-check"></i><b>2.7</b> P值和置信区间</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html"><i class="fa fa-check"></i><b>3</b> 如何确定AB实验</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#确定目标和假设"><i class="fa fa-check"></i><b>3.1</b> 确定目标和假设</a></li>
+<li class="chapter" data-level="3.2" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#测试指标"><i class="fa fa-check"></i><b>3.2</b> 测试指标</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#评价指标有哪些"><i class="fa fa-check"></i><b>3.2.1</b> 评价指标有哪些?</a></li>
+<li class="chapter" data-level="3.2.2" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#检验敏感性"><i class="fa fa-check"></i><b>3.2.2</b> 检验敏感性</a></li>
+<li class="chapter" data-level="3.2.3" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#选取具体的评价指标"><i class="fa fa-check"></i><b>3.2.3</b> 选取具体的评价指标</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#oec-overall-evaluation-criteria"><i class="fa fa-check"></i><b>3.3</b> OEC (Overall Evaluation Criteria)</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="如何确定ab实验.html"><a href="如何确定ab实验.html#指标的波动性"><i class="fa fa-check"></i><b>3.3.1</b> 指标的波动性</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="实验单位.html"><a href="实验单位.html"><i class="fa fa-check"></i><b>4</b> 实验单位</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="实验单位.html"><a href="实验单位.html#实验单位有哪些"><i class="fa fa-check"></i><b>4.1</b> 实验单位有哪些</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="实验单位.html"><a href="实验单位.html#用户层面-user-level"><i class="fa fa-check"></i><b>4.1.1</b> 用户层面 User Level</a></li>
+<li class="chapter" data-level="4.1.2" data-path="实验单位.html"><a href="实验单位.html#访问层面visitsession-level"><i class="fa fa-check"></i><b>4.1.2</b> 访问层面（Visit/Session Level）</a></li>
+<li class="chapter" data-level="4.1.3" data-path="实验单位.html"><a href="实验单位.html#页面层面page-level"><i class="fa fa-check"></i><b>4.1.3</b> 页面层面（Page Level）</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="实验单位.html"><a href="实验单位.html#确定实验单位的三大原则"><i class="fa fa-check"></i><b>4.2</b> 确定实验单位的三大原则</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="实验单位.html"><a href="实验单位.html#保证用户体验的连贯性"><i class="fa fa-check"></i><b>4.2.1</b> 保证用户体验的连贯性</a></li>
+<li class="chapter" data-level="4.2.2" data-path="实验单位.html"><a href="实验单位.html#实验单位要和评价指标的单位保持一致"><i class="fa fa-check"></i><b>4.2.2</b> 实验单位要和评价指标的单位保持一致</a></li>
+<li class="chapter" data-level="4.2.3" data-path="实验单位.html"><a href="实验单位.html#样本数量要尽可能多"><i class="fa fa-check"></i><b>4.2.3</b> 样本数量要尽可能多</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="样本量.html"><a href="样本量.html"><i class="fa fa-check"></i><b>5</b> 样本量</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="样本量.html"><a href="样本量.html#样本量多少为好"><i class="fa fa-check"></i><b>5.1</b> 样本量多少为好</a></li>
+<li class="chapter" data-level="5.2" data-path="样本量.html"><a href="样本量.html#功效分析"><i class="fa fa-check"></i><b>5.2</b> 功效分析</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="样本量.html"><a href="样本量.html#功效分析的作用"><i class="fa fa-check"></i><b>5.2.1</b> 功效分析的作用</a></li>
+<li class="chapter" data-level="5.2.2" data-path="样本量.html"><a href="样本量.html#功效分析的原理"><i class="fa fa-check"></i><b>5.2.2</b> 功效分析的原理</a></li>
+<li class="chapter" data-level="5.2.3" data-path="样本量.html"><a href="样本量.html#功效分析的步骤"><i class="fa fa-check"></i><b>5.2.3</b> 功效分析的步骤</a></li>
+<li class="chapter" data-level="5.2.4" data-path="样本量.html"><a href="样本量.html#功效分析的应用场景"><i class="fa fa-check"></i><b>5.2.4</b> 功效分析的应用场景</a></li>
+<li class="chapter" data-level="5.2.5" data-path="样本量.html"><a href="样本量.html#功效分析的例子"><i class="fa fa-check"></i><b>5.2.5</b> 功效分析的例子</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="样本量.html"><a href="样本量.html#如何理解-power"><i class="fa fa-check"></i><b>5.3</b> 如何理解 power</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="样本量.html"><a href="样本量.html#如何理解功效"><i class="fa fa-check"></i><b>5.3.1</b> 如何理解功效</a></li>
+<li class="chapter" data-level="5.3.2" data-path="样本量.html"><a href="样本量.html#举个例子"><i class="fa fa-check"></i><b>5.3.2</b> 举个例子</a></li>
+<li class="chapter" data-level="5.3.3" data-path="样本量.html"><a href="样本量.html#功效的计算"><i class="fa fa-check"></i><b>5.3.3</b> 功效的计算</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="样本量.html"><a href="样本量.html#显著性水平和power-的关系"><i class="fa fa-check"></i><b>5.4</b> 显著性水平和power 的关系</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="样本量.html"><a href="样本量.html#更清晰的解释"><i class="fa fa-check"></i><b>5.4.1</b> 更清晰的解释</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="样本量.html"><a href="样本量.html#功效分析参数表格"><i class="fa fa-check"></i><b>5.5</b> 功效分析参数表格</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="样本量.html"><a href="样本量.html#独立样本-t-检验independent-samples-t-test"><i class="fa fa-check"></i><b>5.5.1</b> 1. 独立样本 t 检验（Independent Samples T-Test）</a></li>
+<li class="chapter" data-level="5.5.2" data-path="样本量.html"><a href="样本量.html#配对样本-t-检验paired-samples-t-test"><i class="fa fa-check"></i><b>5.5.2</b> 2. 配对样本 t 检验（Paired Samples T-Test）</a></li>
+<li class="chapter" data-level="5.5.3" data-path="样本量.html"><a href="样本量.html#卡方检验chi-square-test"><i class="fa fa-check"></i><b>5.5.3</b> 3. 卡方检验（Chi-Square Test）</a></li>
+<li class="chapter" data-level="5.5.4" data-path="样本量.html"><a href="样本量.html#单因素方差分析one-way-anova"><i class="fa fa-check"></i><b>5.5.4</b> 4. 单因素方差分析（One-Way ANOVA）</a></li>
+<li class="chapter" data-level="5.5.5" data-path="样本量.html"><a href="样本量.html#二项检验binomial-test"><i class="fa fa-check"></i><b>5.5.5</b> 5. 二项检验（Binomial Test）</a></li>
+<li class="chapter" data-level="5.5.6" data-path="样本量.html"><a href="样本量.html#相关性检验correlation-test"><i class="fa fa-check"></i><b>5.5.6</b> 6. 相关性检验（Correlation Test）</a></li>
+<li class="chapter" data-level="5.5.7" data-path="样本量.html"><a href="样本量.html#说明"><i class="fa fa-check"></i><b>5.5.7</b> 说明</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="样本量.html"><a href="样本量.html#实验设置"><i class="fa fa-check"></i><b>5.6</b> 实验设置</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="样本量.html"><a href="样本量.html#简单随机抽样"><i class="fa fa-check"></i><b>5.6.1</b> 简单随机抽样</a></li>
+<li class="chapter" data-level="5.6.2" data-path="样本量.html"><a href="样本量.html#估算实验组和对照组评价指标的差值δ"><i class="fa fa-check"></i><b>5.6.2</b> 估算实验组和对照组评价指标的差值δ</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="什么时候可以开始检验.html"><a href="什么时候可以开始检验.html"><i class="fa fa-check"></i><b>6</b> 什么时候可以开始检验</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="什么时候可以开始检验.html"><a href="什么时候可以开始检验.html#保障统计品质的合理性检验"><i class="fa fa-check"></i><b>6.1</b> 保障统计品质的合理性检验</a></li>
+<li class="chapter" data-level="6.2" data-path="什么时候可以开始检验.html"><a href="什么时候可以开始检验.html#分析结果"><i class="fa fa-check"></i><b>6.2</b> 分析结果</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html"><i class="fa fa-check"></i><b>7</b> 如何搭建规范的AB测试框架</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#从业务问题出发确定ab测试的目标和假设"><i class="fa fa-check"></i><b>7.1</b> 从业务问题出发，确定A/B测试的目标和假设</a></li>
+<li class="chapter" data-level="7.2" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#确定ab测试的评价指标"><i class="fa fa-check"></i><b>7.2</b> 确定A/B测试的评价指标</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#第一个问题如何定义实验中的用户"><i class="fa fa-check"></i><b>7.2.1</b> 第一个问题，如何定义“实验中的用户”？</a></li>
+<li class="chapter" data-level="7.2.2" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#第二个问题如何确定用户从触发弹窗开始到最终使用功能的时间窗口期呢"><i class="fa fa-check"></i><b>7.2.2</b> 第二个问题，如何确定用户从触发弹窗开始到最终使用功能的时间窗口期呢？</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#选取实验对象的单位"><i class="fa fa-check"></i><b>7.3</b> 选取实验对象的单位</a></li>
+<li class="chapter" data-level="7.4" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#计算所需的样本大小和实验所需时间"><i class="fa fa-check"></i><b>7.4</b> 计算所需的样本大小和实验所需时间</a></li>
+<li class="chapter" data-level="7.5" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#分析测试结果"><i class="fa fa-check"></i><b>7.5</b> 分析测试结果</a></li>
+<li class="chapter" data-level="7.6" data-path="如何搭建规范的ab测试框架.html"><a href="如何搭建规范的ab测试框架.html#总结-1"><i class="fa fa-check"></i><b>7.6</b> 总结</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html"><i class="fa fa-check"></i><b>8</b> 如果结果不显著怎么办</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#为什么会出现实验结果不显著"><i class="fa fa-check"></i><b>8.1</b> 为什么会出现“实验结果不显著”？</a></li>
+<li class="chapter" data-level="8.2" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#如何通过增加样本量来提高power"><i class="fa fa-check"></i><b>8.2</b> 如何通过增加样本量来提高Power？</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#延长测试时间"><i class="fa fa-check"></i><b>8.2.1</b> 延长测试时间</a></li>
+<li class="chapter" data-level="8.2.2" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#增加测试使用流量在总流量中的占比"><i class="fa fa-check"></i><b>8.2.2</b> 增加测试使用流量在总流量中的占比</a></li>
+<li class="chapter" data-level="8.2.3" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#多个测试共用同一个对照组"><i class="fa fa-check"></i><b>8.2.3</b> 多个测试共用同一个对照组</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#如何通过减小方差来提高power"><i class="fa fa-check"></i><b>8.3</b> 如何通过减小方差来提高Power？</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#减小指标的方差"><i class="fa fa-check"></i><b>8.3.1</b> 减小指标的方差</a></li>
+<li class="chapter" data-level="8.3.2" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#第二种方式选用方差较小的指标"><i class="fa fa-check"></i><b>8.3.2</b> 第二种方式：选用方差较小的指标。</a></li>
+<li class="chapter" data-level="8.3.3" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#倾向评分匹配propensity-score-matching"><i class="fa fa-check"></i><b>8.3.3</b> 倾向评分匹配（Propensity Score Matching）</a></li>
+<li class="chapter" data-level="8.3.4" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#在触发阶段计算指标"><i class="fa fa-check"></i><b>8.3.4</b> 在触发阶段计算指标</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="如果结果不显著怎么办.html"><a href="如果结果不显著怎么办.html#小结"><i class="fa fa-check"></i><b>8.4</b> 小结</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="常见问题.html"><a href="常见问题.html"><i class="fa fa-check"></i><b>9</b> 常见问题</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="常见问题.html"><a href="常见问题.html#多重检验问题multiple-testing-problem"><i class="fa fa-check"></i><b>9.1</b> 多重检验问题（Multiple Testing Problem）</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="常见问题.html"><a href="常见问题.html#多重检验为什么会是一个问题"><i class="fa fa-check"></i><b>9.1.1</b> 多重检验为什么会是一个问题？</a></li>
+<li class="chapter" data-level="9.1.2" data-path="常见问题.html"><a href="常见问题.html#什么时候会遇到多重检验问题"><i class="fa fa-check"></i><b>9.1.2</b> 什么时候会遇到多重检验问题？</a></li>
+<li class="chapter" data-level="9.1.3" data-path="常见问题.html"><a href="常见问题.html#如何解决多重检验问题"><i class="fa fa-check"></i><b>9.1.3</b> 如何解决多重检验问题？</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="常见问题.html"><a href="常见问题.html#学习效应learning-effect"><i class="fa fa-check"></i><b>9.2</b> 学习效应(Learning Effect)</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="常见问题.html"><a href="常见问题.html#学习效应在实践中有哪些表现形式"><i class="fa fa-check"></i><b>9.2.1</b> 学习效应在实践中有哪些表现形式？</a></li>
+<li class="chapter" data-level="9.2.2" data-path="常见问题.html"><a href="常见问题.html#学习效应该如何检测"><i class="fa fa-check"></i><b>9.2.2</b> 学习效应该如何检测？</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="常见问题.html"><a href="常见问题.html#辛普森悖论"><i class="fa fa-check"></i><b>9.3</b> 辛普森悖论</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="常见问题.html"><a href="常见问题.html#数学描述"><i class="fa fa-check"></i><b>9.3.1</b> 数学描述</a></li>
+<li class="chapter" data-level="9.3.2" data-path="常见问题.html"><a href="常见问题.html#示例"><i class="fa fa-check"></i><b>9.3.2</b> 示例</a></li>
+<li class="chapter" data-level="9.3.3" data-path="常见问题.html"><a href="常见问题.html#辛普森悖论的关键原因"><i class="fa fa-check"></i><b>9.3.3</b> 辛普森悖论的关键原因</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="常见问题.html"><a href="常见问题.html#实验组和对照组要相互独立"><i class="fa fa-check"></i><b>9.4</b> 实验组和对照组要相互独立</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="常见问题.html"><a href="常见问题.html#破坏两组独立性的表现形式有哪些"><i class="fa fa-check"></i><b>9.4.1</b> 破坏两组独立性的表现形式有哪些？</a></li>
+<li class="chapter" data-level="9.4.2" data-path="常见问题.html"><a href="常见问题.html#如何避免破坏两组的独立性"><i class="fa fa-check"></i><b>9.4.2</b> 如何避免破坏两组的独立性？</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html"><i class="fa fa-check"></i><b>10</b> 什么时候不适合AB测试</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#当没有办法控制想要测试的变量时"><i class="fa fa-check"></i><b>10.1</b> 当没有办法控制想要测试的变量时</a></li>
+<li class="chapter" data-level="10.2" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#当有重大事件发布时"><i class="fa fa-check"></i><b>10.2</b> 当有重大事件发布时</a></li>
+<li class="chapter" data-level="10.3" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#用户量很少的时候"><i class="fa fa-check"></i><b>10.3</b> 用户量很少的时候</a></li>
+<li class="chapter" data-level="10.4" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#ab-测试替代方法"><i class="fa fa-check"></i><b>10.4</b> AB 测试替代方法</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#因果推断"><i class="fa fa-check"></i><b>10.4.1</b> 因果推断</a></li>
+<li class="chapter" data-level="10.4.2" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#用户研究"><i class="fa fa-check"></i><b>10.4.2</b> 用户研究</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="什么时候不适合ab测试.html"><a href="什么时候不适合ab测试.html#知识点总结"><i class="fa fa-check"></i><b>10.5</b> 知识点总结</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="构建一个shiny-的样本计算器.html"><a href="构建一个shiny-的样本计算器.html"><i class="fa fa-check"></i><b>11</b> 构建一个Shiny 的样本计算器</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/liamamilin" target="blank">AB测试实战</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">AB 测试实战</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="如何确定ab实验" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> 如何确定AB实验<a href="如何确定ab实验.html#如何确定ab实验" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="确定目标和假设" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> 确定目标和假设<a href="如何确定ab实验.html#确定目标和假设" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>我们需要明确的一点是, 做A/B测试肯定是为了解决业务上面遇到的问题.常见的问题如下:</p>
+<p><img src="https://lianglianglee.com/%e4%b8%93%e6%a0%8f/AB%20%e6%b5%8b%e8%af%95%e4%bb%8e%200%20%e5%88%b0%201/assets/bcf507bd6a6f45f89da54edfa1286968.jpg" /></p>
+<ol style="list-style-type: decimal">
+<li>所有的业务问题都有一个目标, 这个目标就是结果.</li>
+<li>业务目标实现的路径, 就是我们可能要做的事情.</li>
+</ol>
+<p>这样做一个抽样, 把业务目标作为结果, 把实现目标路径中的动作视为变换的原因, 这样就讲业务问题转换成为了因果推断的. 我们看一个例子, 假设一个付费APP 想要提高营收, 我们看看如何设定目标和假设.</p>
+<ol style="list-style-type: decimal">
+<li>分析问题</li>
+</ol>
+<p>营收是一个太大的指标, 我们可以做一个拆解, 拆解的方式很多, 假设,拆解成为客户 * 客单价. 假设我们发现我们成交客户很多, 但是客单价都太低了. 那么这里的问题就变成, 如何保障成交客户不变的情况下,提高客户的客单价.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>提出解决业务问题的大致方案</li>
+</ol>
+<p>提高客单价的方案有很多.</p>
+<ul>
+<li>交叉销售/专家销售 : 改进推荐算法, 给客户推相关产品以及价格更高, 功能更强的产品</li>
+<li>满减优惠</li>
+<li>会员和积分制度</li>
+<li>等等</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>提出具体的假设</li>
+</ol>
+<p>做一个满减的功能, 是不是能够提高客单价, 从而提高销售额呢?</p>
+<p>这样一来, 我们就初步确定了目标和假设.</p>
+<p><img src="https://picx.zhimg.com/80/v2-15a8d619e1523e3cc6a2a79f5b1d3130_720w.png" /></p>
+<p>有了目标和假设之后, 我们就需要确定指标.</p>
+</div>
+<div id="测试指标" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> 测试指标<a href="如何确定ab实验.html#测试指标" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>通常而言, AB 测试的指标分为 : 评价指标(Evaluation Metrcs) 和 护栏指标(Guardrail Metrics) .</p>
+<ol style="list-style-type: decimal">
+<li>评价指标 : 一般是驱动公司/组织实现核心价值的指标. 例如点击率, 转换率, 客单价. 这些指标可以直接评价AB测试的结果.</li>
+<li>护栏指标 : 关于AB测试中合理性检验的指标. 例如, 我们加入了一个功能提高了用户在页面的留存, 但是页面的打开速度变慢了很多. 从长期起看, 这个会造成不好的用户体验, 不利于长远业务发展.</li>
+</ol>
+<div id="评价指标有哪些" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> 评价指标有哪些?<a href="如何确定ab实验.html#评价指标有哪些" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>有几个原则:</p>
+<ol style="list-style-type: decimal">
+<li>可归因 : 这个指标的变化可以可以归结到某一个因素.</li>
+<li>可测量 : 例如客户满意度, 这个就很难量化</li>
+<li>敏感性和稳定性 : “如果实验中的变量变化了，评价指标要能敏感地做出相应的变化；但如果是其他因素变化了，评价指标要能保持相应的稳定性。”</li>
+</ol>
+<p>因此 , 如果 测试来检验单次变化(单次推送, 邮件) 一般选择短期效果的指标, 因为长期效果目标通常对单次变化不敏感. 如果ab 测试来检测连续的, 永久的变化(增加产品功能) , 则可以选择长期效果指标.</p>
+</div>
+<div id="检验敏感性" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> 检验敏感性<a href="如何确定ab实验.html#检验敏感性" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>可见，如果选取的评价指标对 A/B 测试中的变化不敏感，或者对其他变化太敏感，我们的实验都会失败。那么，具体该如何测量评价指标的敏感性和稳定性呢？业界通常采用 A/A 测试来测量稳定性，用回溯性分析来表征敏感性。我来给你具体解释一下。和 A/B 测试类似，A/A 测试（A/A Test）也是把被测试对象分成实验组和对照组。但不同的是，A/A 测试中两组对象拥有的是完全相同的体验，如果 A/A 测试的结果发现两组的指标有显著不同，那么就说明要么分组分得不均匀，每组的数据分布差异较大；要么选取的指标波动范围太大，稳定性差。</p>
+<div id="为什么先做-aa-测试" class="section level4 hasAnchor" number="3.2.2.1">
+<h4><span class="header-section-number">3.2.2.1</span> 为什么先做 A/A 测试？<a href="如何确定ab实验.html#为什么先做-aa-测试" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li><p><strong>验证系统的随机分配</strong>：A/A 测试是将同样的版本（A 和 A）分配给两组用户，这样理论上两组的转化率或均值应该没有显著差异。如果 A/A 测试显示出显著差异，说明随机分配可能存在问题，或者分配机制没有保证用户群体的一致性。</p></li>
+<li><p><strong>检查数据收集和统计方法</strong>：在 A/A 测试中，两组的表现应该相近。如果结果显示显著差异，可能是由于数据收集过程中的错误、度量指标选择不当、或者统计分析方法不合理。</p></li>
+<li><p><strong>设定基线噪声水平</strong>：A/A 测试可以帮助我们了解随机波动的水平（基线噪声），从而在 A/B 测试中更准确地判断差异是否显著。如果 A/A 测试结果没有显著差异，可以进一步确保在 A/B 测试中，任何观测到的差异更可能是真实的，而不是噪声造成的。</p></li>
+</ol>
+</div>
+<div id="aa-测试的步骤" class="section level4 hasAnchor" number="3.2.2.2">
+<h4><span class="header-section-number">3.2.2.2</span> A/A 测试的步骤<a href="如何确定ab实验.html#aa-测试的步骤" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li><p><strong>划分用户</strong>：将用户随机分成两组，并确保每组都接触到相同的版本（即 A 和 A），观察他们的行为表现。</p></li>
+<li><p><strong>收集数据</strong>：跟踪两个组的转化率、点击率或其他关键指标，和 A/B 测试相同，保证数据的完整性。</p></li>
+<li><p><strong>统计检验</strong>：对两组的关键指标进行显著性检验，通常使用 t 检验或 Z 检验。如果 p 值大于设定的显著性水平（例如 0.05），则可以认为两组没有显著差异，测试环境是可靠的。</p></li>
+</ol>
+</div>
+<div id="判断-aa-测试的结果" class="section level4 hasAnchor" number="3.2.2.3">
+<h4><span class="header-section-number">3.2.2.3</span> 判断 A/A 测试的结果<a href="如何确定ab实验.html#判断-aa-测试的结果" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>不显著差异</strong>：如果 A/A 测试中没有显著差异，说明测试流程和数据收集系统正常，可以进行 A/B 测试。</li>
+<li><strong>显著差异</strong>：如果 A/A 测试中发现显著差异，可能需要检查数据收集、分配机制或度量方式是否存在问题，或者是否存在其他潜在的干扰因素（例如不同时间段的用户行为差异）。</li>
+</ul>
+<p>在第一次做 A/B 测试时，进行 A/A 测试是一个明智的步骤，可以确保测试环境和数据收集过程的准确性。<strong>只有在 A/A 测试结果不显著的前提下，才能更有信心地进行 A/B 测试</strong>。这样可以降低测试过程中的偏差风险，提高 A/B 测试结果的可靠性。</p>
+</div>
+</div>
+<div id="选取具体的评价指标" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> 选取具体的评价指标<a href="如何确定ab实验.html#选取具体的评价指标" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>明确业务阶段, 确定,定义评价指标</li>
+<li>通过其他渠道, 参考其他公司实验和研究. 例如和可以重点看Facebook 中 Measurement 的相关文章.</li>
+</ol>
+<p>其实TO C 产品AB测试场景都非常相似.</p>
+</div>
+</div>
+<div id="oec-overall-evaluation-criteria" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> OEC (Overall Evaluation Criteria)<a href="如何确定ab实验.html#oec-overall-evaluation-criteria" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>在实际的业务需求中，有时会出现多个目标，同一目标也可能有多个都很重要的评价指标，需要我们把它们都综合起来考虑。对于单个指标，我们可以用上一讲的方法来确定；但如果要综合考虑多个指标时，又要如何考虑呢？</p>
+<p>我们先看一个例子。</p>
+<p>亚马逊和用户沟通的一个重要渠道就是电子邮件，它有一个专门给用户发送电子邮件的平台，通过两种方式来精准定位用户：</p>
+<p>基于用户的历史购买数据来构建用户的个人喜好，通过推荐算法来发邮件给用户做推荐；
+亚马逊的编辑团队会人工精选出推荐产品，通过电子邮件发送给用户。
+确定了精准用户以后，亚马逊还面临一个问题：要用什么指标来衡量电子邮件的效果呢？</p>
+<p>你可能会想到，给用户发送邮件是为了让他们购买，所以邮件产生的收入可以作为评价指标。</p>
+<p>实际上，亚马逊最初就是这么做的：他们确定的假设是通过多发电子邮件来增加额外的收入，评价指标就是邮件产生的收入。</p>
+<p>那么这个时候，一个假想的A/B测试就被设计了出来。</p>
+<p>在实验组，我们给用户发邮件。
+在对照组，我们不给用户发邮件。
+结果可想而知。对照组没有收到任何邮件，也就不会有邮件产生的收入。而在实验组的用户，由于收到很多邮件，所以产生了不少收入。</p>
+<p>出现这个结果的根本原因是，这个指标本身是单调递增的。也就是说，发的电子邮件越多，点击的用户也会越多，从邮件中获得的收入也会越多。所以，想要有更多的收入，就要发更多的邮件。</p>
+<p>但现实情况是，用户收到的邮件多到一定程度后，他们就会觉得是垃圾邮件，被骚扰了，结果就是影响了用户体验，用户选择退订（Unsubscribe）邮件。而用户一旦退订，以后就再也接收不到来自亚马逊的邮件了。</p>
+<p>把邮件产生的收入作为评价指标，可以说只是用来优化短期的收入，并没有考虑到长期的用户价值。用户一旦因为被骚扰而退订，亚马逊就失去了在未来给他们发邮件做营销的机会了。所以，邮件产生的收入并不适合作为评价指标，我们需要综合考虑发邮件所带来的好处和潜在的损失，结合多个指标，构建一个总体评价标准 （Overall Evaluation Criteria，简称OEC）。</p>
+<p><img src="https://pic1.zhimg.com/80/v2-3f62a6a7c4a8ad20425269fcc6395c7d_720w.png" /></p>
+<ul>
+<li>i表示每一个用户</li>
+<li>S 表示退订人数</li>
+<li>Unsubscribe_lifetime_loss ，代表用户退订邮件带来的预计的损失。</li>
+<li>n，代表每组的样本大小。</li>
+</ul>
+<p>当亚马逊实施了这个OEC之后，惊讶地发现有一半以上电子邮件的OEC都是负的，这就说明多发邮件并不总是能带来正的收益。</p>
+<p>当亚马逊发现退订会造成这么大的长期损失以后，就改进了它的退订页面：从退订所有的亚马逊邮件到退订某一个类别的邮件。比如可以选择只退订亚马逊图书，从而避免了全部退订，也减少了长期的潜在损失。</p>
+<p>通过刚刚的分析，我们可以看到，当要考察的事物包含多个方面时，只有综合各方面的指标，才能把握总体的好坏。这也是使用OEC最明显的一个好处。最常见的一类OEC，就是亚马逊的这种结合变化带来的潜在收益和损失的OEC。需要注意的是，这里的“损失”还有可能是护栏指标，也就是说OEC有可能会包含护栏指标。</p>
+<p>另外，使用OEC的另一个好处就是可以避免多重检验问题（Multiple Testing Problem）。如果我们不把不同的指标加权结合起来分析，而是单独比较它们，就会出现多重检验的问题，导致A/B测试的结果不准确。</p>
+<div id="指标的波动性" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> 指标的波动性<a href="如何确定ab实验.html#指标的波动性" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>在统计学里面，指标的波动性通常用其平均值和平均值的标准差来表示，一个指标平均值的标准差越大，说明其波动性越大。这里面要注意，变量平均值的标准差又叫做标准误差（Standard Error）。 进一步计算置信区间, 这个区间可以理解为波动性.</p>
+<p><img src="https://cdn.mathpix.com/snip/images/M5lVVVew3Egqa6UxGoeggssAA6FSmaQIC_kaPHw3YWE.original.fullsize.png" /></p>
+<p>在实际应用中，有些复杂的指标可能不符合正态分布，或者我们根本不知道它们是什么分布，就很难甚至是没办法找到相应的统计公式去计算了。</p>
+<p>我们可以跑多个不同样本大小的A/A测试，然后分别计算每个样本的指标大小，计算出来后，再把这些指标从小到大排列起来，并且去除最小2.5% 和最大2.5%的值，剩下的就是95%的置信区间。</p>
+<p>我们可以先跑一个样本很大的A/A测试，然后在这个大样本中进行随机可置换抽样（Random Sample with Replacement）， 抽取不同大小的样本来分别计算指标。然后采用和A/A测试一样的流程：把这些指标从小到大排列起来，并且去除最小2.5% 和最大2.5%的值，得到95%的置信区间。</p>
+<p>在实际应用中，Bootstrapping会更流行些，因为只需要跑一次A/A测试，既节省时间也节省资源。</p>
+<p>不过要注意的是，即使对于那些简单的、符合正态分布的、可以用统计方法直接计算方差的指标，如果有条件、有时间的话，我也推荐你同时用统计公式和Bootstrapping两种方法分别计算方差。如果两者的结果差距较大，就需要再去跑更多的A/A测试，所以从两方面验证得到的结果会更保险。</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="a-b-测试的统计基础.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="实验单位.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-cross-refs.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
